@@ -5,6 +5,8 @@ import {
   isOnActiveRoster,
 } from "@/lib/players";
 
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
   const { players: allPlayers, error } = await fetchPlayers();
 

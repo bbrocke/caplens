@@ -108,9 +108,15 @@ export async function fetchPlayers(): Promise<{
   players: Player[];
   error: string | null;
 }> {
-  const { data, error } = await getSupabase()
-    .from("players")
-    .select(PLAYERS_QUERY);
+  let supabase;
+  try {
+    supabase = getSupabase();
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    return { players: [], error: message };
+  }
+
+  const { data, error } = await supabase.from("players").select(PLAYERS_QUERY);
 
   if (error) {
     return { players: [], error: error.message };
