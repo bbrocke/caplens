@@ -27,9 +27,11 @@ Reference: NHL `/v1/roster/{club}/current`, all 32 clubs retrieved on 2026-09-06
 
 `corrections.sql` guards the original IDs and teams, applies all 14 changes within a transaction, verifies the result, and defaults to ROLLBACK. It has not been executed. Contract team IDs are historical and are not copied from current affiliations.
 
-## Unresolved players
+## Players absent from the feed
 
 Absence from the source does not establish retirement, free agency, or inactivity.
+
+Resolved explanations: Johnny Gaudreau is already stored as deceased; Logan Couture is already stored as retired. Anze Kopitar's retirement is confirmed by [NHL reporting on August 23, 2026](https://www.nhl.com/news/anze-kopitar-happy-in-retirement-after-storied-nhl-career). His stored active status needs a current-roster correction to retired, while preserving his 2025–26 playing and contract history. Production has not been changed. This leaves 18 unexplained absences. The table and audit.json preserve the original database snapshot.
 
 | Player | Stored team | Stored status |
 |---|---|---|
@@ -57,7 +59,7 @@ Absence from the source does not establish retirement, free agency, or inactivit
 
 ## Remaining release gates
 
-- Reconcile the 21 absent players with official transactions or player records; define coverage for the 575 source-only players.
+- Reconcile the remaining 18 unexplained absences with official transactions or player records; prepare and validate Kopitar's retired-status correction; define coverage for the 575 source-only players.
 - Verify current contract coverage. The app currently selects 2025–26 contracts; current roster updates alone do not make those current-season comparisons.
 - Align contract season, remaining years, cap denominator and labels before publishing current comparisons. NHL announced a $104M upper limit for 2026–27: https://www.nhl.com/news/nhl-nhlpa-announce-team-payroll-ranges-for-next-3-seasons-through-2027-28
 - Investigate 65 previously flagged term/date-span differences; entry-level slides may be legitimate.
