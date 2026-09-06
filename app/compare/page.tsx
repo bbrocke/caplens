@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { fetchPlayers, isOnActiveRoster, type Player } from "@/lib/players";
 import {
+  Cell,
   BarChart,
   Bar,
   XAxis,
@@ -12,10 +13,21 @@ import {
   LabelList,
 } from "recharts";
 
+const PAGE_SIZE = 12;
+const COLORS = ["#34d399", "#a78bfa", "#38bdf8"];
+const compactMoney = (value: number) =>
+  new Intl.NumberFormat("en-US", {
+    style: "currency", currency: "USD", notation: "compact",
+    maximumFractionDigits: 2,
+  }).format(value);
+
 export default function ComparePage() {
   const [players, setPlayers] = useState<Player[]>([]);
   const [selected, setSelected] = useState<string[]>([]);
   const [search, setSearch] = useState("");
+  const [team, setTeam] = useState("");
+  const [position, setPosition] = useState("");
+  const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -26,6 +38,10 @@ export default function ComparePage() {
       if (cancelled) return;
       setPlayers(players.filter(isOnActiveRoster));
       setError(error);
+      setLoading(false);
+    }).catch(() => {
+      if (cancelled) return;
+      setError("Unable to load players. Please refresh and try again.");
       setLoading(false);
     });
 
@@ -44,16 +60,22 @@ export default function ComparePage() {
     );
   };
 
-  const selectedPlayers = players.filter((p) => selected.includes(p.id));
-
-  const filteredPlayers = players.filter((player) =>
-    `${player.name} ${player.team} ${player.position}`
-      .toLowerCase()
-      .includes(search.toLowerCase())
+  const selectedPlayers = selected.flatMap((id) =>
+    players.filter((player) => player.id === id)
   );
+  const teams = [...new Set(players.map((p) => p.team))].sort();
+  const positions = [...new Set(players.map((p) => p.position))].sort();
+  const filteredPlayers = players.filter((player) =>
+    (!team || player.team === team) &&
+    (!position || player.position === position) &&
+    `${player.name} ${player.team} ${player.position}`
+      .toLowerCase().includes(search.trim().toLowerCase())
+  );
+  const pageCount = Math.ceil(filteredPlayers.length / PAGE_SIZE);
+  const visiblePlayers = filteredPlayers.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
 
   return (
-    <main className="min-h-screen bg-slate-950 p-8 text-white">
+    <main className="mx-auto min-h-screen w-full max-w-6xl bg-slate-950 px-4 py-6 text-white sm:p-8">
       <h1 className="text-4xl font-bold">Compare Players</h1>
 
       {error && (
@@ -64,38 +86,81 @@ export default function ComparePage() {
         <p className="mt-4 text-slate-400">Loading players…</p>
       )}
 
-      <input
-        type="text"
-        placeholder="Search by player, team, or position..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        className="mt-6 w-full rounded-xl border border-slate-800 bg-slate-900 px-4 py-3 text-white outline-none placeholder:text-slate-500"
-      />
+      <p className="mt-2 text-slate-400">Choose up to three players to compare.</p>
+      <section aria-label="Selected players" className="mt-6 rounded-xl border border-slate-700 bg-slate-900 p-4">
+        <div className="flex items-center justify-between gap-3">
+          <h2 className="font-semibold">Selected ({selected.length}/3)</h2>
+          {selected.length > 0 && <button className="min-h-11 underline" onClick={() => setSelected([])}>Clear all</button>}
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {selectedPlayers.map((player, index) => (
+            <button key={player.id} onClick={() => togglePlayer(player.id)}
+              aria-label={`Remove ${player.name}`}
+              className="min-h-11 rounded-lg border px-3 py-2 text-sm"
+              style={{ borderColor: COLORS[index] }}>
+              {player.name} ×
+            </button>
+          ))}
+        </div>
+        <p role="status" className="mt-2 text-sm text-slate-400">
+          {selected.length === 3 ? "Three players selected. Remove one to add another." :
+            selected.length === 0 ? "Search below to add your first player." : "Your selections stay here when you filter results."}
+        </p>
+      </section>
 
-      {/* Player selector */}
-      <div className="mt-6 flex flex-wrap gap-2">
-        {filteredPlayers.map((player) => (
-          <button
-            key={player.id}
-            onClick={() => togglePlayer(player.id)}
-            className={`rounded-full px-4 py-2 text-sm ${
-              selected.includes(player.id)
-                ? "bg-emerald-500 text-black"
-                : "bg-slate-800"
-            }`}
-          >
-            {player.name}
-          </button>
-        ))}
-      </div>
+      <section aria-label="Find players" className="mt-6">
+        <label htmlFor="player-search" className="text-sm font-medium">Search players</label>
+        <input id="player-search" type="search" placeholder="Name, team, or position"
+          value={search} onChange={(e) => { setSearch(e.target.value); setPage(0); }}
+          className="mt-2 min-h-11 w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 focus-visible:outline-emerald-400" />
+        <div className="mt-3 grid grid-cols-2 gap-3">
+          <label className="text-sm">Team
+            <select value={team} onChange={(e) => { setTeam(e.target.value); setPage(0); }}
+              className="mt-1 min-h-11 w-full rounded-lg border border-slate-700 bg-slate-900 px-2">
+              <option value="">All teams</option>
+              {teams.map((value) => <option key={value}>{value}</option>)}
+            </select>
+          </label>
+          <label className="text-sm">Position
+            <select value={position} onChange={(e) => { setPosition(e.target.value); setPage(0); }}
+              className="mt-1 min-h-11 w-full rounded-lg border border-slate-700 bg-slate-900 px-2">
+              <option value="">All positions</option>
+              {positions.map((value) => <option key={value}>{value}</option>)}
+            </select>
+          </label>
+        </div>
+        {!loading && !error && <>
+          <p role="status" className="my-3 text-sm text-slate-400">
+            {filteredPlayers.length === 0 ? "No players match. Try another search or filter." :
+              `Showing ${page * PAGE_SIZE + 1}–${Math.min((page + 1) * PAGE_SIZE, filteredPlayers.length)} of ${filteredPlayers.length} players`}
+          </p>
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+            {visiblePlayers.map((player) => (
+              <button key={player.id} onClick={() => togglePlayer(player.id)}
+                aria-pressed={selected.includes(player.id)}
+                disabled={selected.length === 3 && !selected.includes(player.id)}
+                className={`min-h-14 rounded-lg border p-3 text-left text-sm disabled:opacity-40 ${selected.includes(player.id) ? "border-emerald-400 bg-emerald-950" : "border-slate-700 bg-slate-900"}`}>
+                <span className="block font-medium">{player.name}</span>
+                <span className="text-slate-400">{player.team} · {player.position}</span>
+              </button>
+            ))}
+          </div>
+          {pageCount > 1 && <div className="mt-3 flex items-center justify-between gap-2">
+            <button disabled={page === 0} onClick={() => setPage(page - 1)} className="min-h-11 rounded-lg border border-slate-700 px-4 disabled:opacity-40">Previous</button>
+            <span className="text-sm text-slate-400">{page + 1} / {pageCount}</span>
+            <button disabled={page + 1 >= pageCount} onClick={() => setPage(page + 1)} className="min-h-11 rounded-lg border border-slate-700 px-4 disabled:opacity-40">Next</button>
+          </div>}
+        </>}
+      </section>
 
       {/* Comparison grid */}
       {selectedPlayers.length > 0 && (
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
-          {selectedPlayers.map((p) => (
+        <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {selectedPlayers.map((p, index) => (
             <div
               key={p.id}
-              className="rounded-2xl border border-slate-800 bg-slate-900 p-6"
+              className="rounded-2xl border bg-slate-900 p-4 sm:p-6"
+              style={{ borderColor: COLORS[index] }}
             >
               <h2 className="text-xl font-bold">{p.name}</h2>
               <p className="text-slate-400">{p.team}</p>
@@ -117,16 +182,17 @@ export default function ComparePage() {
 
       {/* Bar chart */}
       {selectedPlayers.length > 0 && (
-        <div className="mt-12 rounded-2xl border border-slate-800 bg-slate-900 p-6">
+        <div className="mt-6 rounded-2xl border border-slate-800 bg-slate-900 p-3 sm:p-6">
           <h2 className="mb-6 text-xl font-bold">Cap Hit Comparison</h2>
 
           <div className="h-72 w-full">
             <ResponsiveContainer>
-              <BarChart data={selectedPlayers}>
-                <XAxis dataKey="name" stroke="#94a3b8" />
+              <BarChart data={selectedPlayers} margin={{ top: 24, right: 8, left: 0, bottom: 24 }}>
+                <XAxis dataKey="name" stroke="#94a3b8" interval={0} tick={{ fontSize: 11 }} angle={-15} textAnchor="end" height={64} />
                 <YAxis
                   stroke="#94a3b8"
-                  tickFormatter={(value) => `$${value / 1000000}M`}
+                  width={58}
+                  tickFormatter={(value) => compactMoney(Number(value))}
                 />
                 <Tooltip
                   formatter={(value) => `$${Number(value ?? 0).toLocaleString()}`}
@@ -135,12 +201,13 @@ export default function ComparePage() {
                     border: "1px solid #1e293b",
                   }}
                 />
-                <Bar dataKey="capHit" fill="#34d399">
+                <Bar dataKey="capHit" name="Cap hit" fill="#34d399">
+                  {selectedPlayers.map((p, index) => <Cell key={p.id} fill={COLORS[index]} />)}
                   <LabelList
                     dataKey="capHit"
                     position="top"
                     formatter={(value) =>
-                      `$${(Number(value ?? 0) / 1000000).toFixed(1)}M`
+                      compactMoney(Number(value ?? 0))
                     }
                     style={{ fill: "#cbd5f5", fontSize: 12 }}
                   />
