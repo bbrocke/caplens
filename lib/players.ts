@@ -1,7 +1,8 @@
 import { getSupabase } from "@/lib/supabaseClient";
 
+// 2025–26 Upper Limit, matching the season and limit shown on the dashboard.
 // Used only when a team's cap_limit isn't set in the database.
-const FALLBACK_TEAM_CAP = 83_500_000;
+const FALLBACK_TEAM_CAP = 95_500_000;
 
 export type Player = {
   id: string;
