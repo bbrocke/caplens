@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { fetchPlayers, isOnActiveRoster, type Player } from "@/lib/players";
+import { DISPLAY_SEASON, formatMoney, fetchPlayers, isOnActiveRoster, type Player } from "@/lib/players";
 import {
   Cell,
   BarChart,
@@ -86,7 +86,7 @@ export default function ComparePage() {
         <p className="mt-4 text-slate-400">Loading players…</p>
       )}
 
-      <p className="mt-2 text-slate-400">Choose up to three players to compare.</p>
+      <p className="mt-2 text-slate-400">Contract season: {DISPLAY_SEASON}. Choose up to three players to compare.</p>
       <section aria-label="Selected players" className="mt-6 rounded-xl border border-slate-700 bg-slate-900 p-4">
         <div className="flex items-center justify-between gap-3">
           <h2 className="font-semibold">Selected ({selected.length}/3)</h2>
@@ -166,10 +166,13 @@ export default function ComparePage() {
               <p className="text-slate-400">{p.team}</p>
 
               <div className="mt-4 space-y-2">
-                <p>Cap Hit: ${p.capHit.toLocaleString()}</p>
-                <p>AAV: ${p.aav.toLocaleString()}</p>
-                <p>Cap %: {p.capPercent}%</p>
-                <p>Years: {p.years}</p>
+                <p>Cap Hit: {formatMoney(p.capHit)}</p>
+                <p>AAV: {formatMoney(p.aav)}</p>
+                <p>Cap %: {p.capPercent}{p.capHit !== null ? "%" : ""}</p>
+                <p>Contract term: {p.years} years</p>
+                <p>Seasons remaining: {p.yearsRemaining}</p>
+                <p className="text-xs text-slate-400">Includes {DISPLAY_SEASON}; measured at season start.</p>
+                <p className="text-sm text-slate-400">{p.contractPeriod}</p>
                 <p>Clause: {p.clause}</p>
                 <p className="capitalize">
                   Status: {p.seasonStatus === "active" ? p.capStatus : p.seasonStatus}
@@ -183,11 +186,12 @@ export default function ComparePage() {
       {/* Bar chart */}
       {selectedPlayers.length > 0 && (
         <div className="mt-6 rounded-2xl border border-slate-800 bg-slate-900 p-3 sm:p-6">
-          <h2 className="mb-6 text-xl font-bold">Cap Hit Comparison</h2>
+          <h2 className="mb-2 text-xl font-bold">Cap Hit Comparison · {DISPLAY_SEASON}</h2>
+          <p className="mb-4 text-sm text-slate-400">Unknown cap hits are omitted from the chart.</p>
 
           <div className="h-72 w-full">
             <ResponsiveContainer>
-              <BarChart data={selectedPlayers} margin={{ top: 24, right: 8, left: 0, bottom: 24 }}>
+              <BarChart data={selectedPlayers.map((p, index) => ({ ...p, color: COLORS[index] })).filter((p) => p.capHit !== null)} margin={{ top: 24, right: 8, left: 0, bottom: 24 }}>
                 <XAxis dataKey="name" stroke="#94a3b8" interval={0} tick={{ fontSize: 11 }} angle={-15} textAnchor="end" height={64} />
                 <YAxis
                   stroke="#94a3b8"
@@ -202,7 +206,7 @@ export default function ComparePage() {
                   }}
                 />
                 <Bar dataKey="capHit" name="Cap hit" fill="#34d399">
-                  {selectedPlayers.map((p, index) => <Cell key={p.id} fill={COLORS[index]} />)}
+                  {selectedPlayers.map((p, index) => p.capHit !== null ? <Cell key={p.id} fill={COLORS[index]} /> : null)}
                   <LabelList
                     dataKey="capHit"
                     position="top"
