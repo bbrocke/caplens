@@ -98,7 +98,7 @@ export default function ComparePage() {
         </select>
       </label>
       <p className="mt-2 text-sm text-slate-400">
-        {season === 2026 ? "Current-season amounts are available for 10 verified contracts. Other amounts show Unknown until reviewed." : "Historical amounts are from the original import and remain under review."}
+        {season === 2026 ? `${players.filter((p) => p.capHit !== null).length} players have sourced current-season amounts. Records needing review show Unknown.` : "Historical amounts are from the original import and remain under review."}
         {" "}Team labels reflect the loaded roster, not historical assignments.
       </p>
       <section aria-label="Selected players" className="mt-6 rounded-xl border border-slate-700 bg-slate-900 p-4">
@@ -182,7 +182,7 @@ export default function ComparePage() {
               <div className="mt-4 space-y-2">
                 <p>Cap Hit: {formatMoney(p.capHit)}</p>
                 <p>AAV (may include performance bonuses): {formatMoney(p.aav)}</p>
-                {p.amountSource && <a className="block text-sm underline" href={p.amountSource} target="_blank" rel="noreferrer">Verified season breakdown</a>}
+                {p.amountSource && <a className="block text-sm underline" href={p.amountSource} target="_blank" rel="noreferrer">{p.amountReview === "individual" ? "Individually reviewed season breakdown" : "Reported season source"}</a>}
                 <p>Cap %: {p.capPercent}{p.capHit !== null ? "%" : ""}</p>
                 <p>Contract term: {p.years} years</p>
                 <p>Seasons remaining: {p.yearsRemaining}</p>
@@ -190,7 +190,7 @@ export default function ComparePage() {
                 <p className="text-sm text-slate-400">{p.contractPeriod}</p>
                 <p>Clause: {p.clause}</p>
                 <p className="capitalize">
-                  Status: {p.seasonStatus === "active" ? p.capStatus : p.seasonStatus}
+                  {season === 2026 ? p.rosterNote : `Historical contract status: ${p.capStatus}`}
                 </p>
               </div>
             </div>

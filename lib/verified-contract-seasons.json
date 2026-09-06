@@ -108,5 +108,27 @@
     "aav": 850000,
     "source": "https://puckpedia.com/player/tyler-boucher/contracts",
     "verifiedAt": "2026-09-06"
+  },
+  {
+    "nhlPlayerId": 8484305,
+    "season": 2026,
+    "startSeason": "2025-26",
+    "endSeason": "2026-27",
+    "termYears": 2,
+    "capHit": 850000,
+    "aav": 850000,
+    "source": "https://puckpedia.com/player/zach-metsa/contracts",
+    "verifiedAt": "2026-09-06"
+  },
+  {
+    "nhlPlayerId": 8475171,
+    "season": 2026,
+    "startSeason": "2024-25",
+    "endSeason": "2027-28",
+    "termYears": 4,
+    "capHit": 3500000,
+    "aav": 3500000,
+    "source": "https://puckpedia.com/player/oliver-ekman-larsson/contracts",
+    "verifiedAt": "2026-09-06"
   }
 ]

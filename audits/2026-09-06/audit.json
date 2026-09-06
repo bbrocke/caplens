@@ -706,5 +706,13 @@
       "Preserve prior contracts when adding Gustafsson, Solovyov and Boucher extensions.",
       "Do not infer active NHL roster slots or net team charges from contract verification."
     ]
+  },
+  "expansion": {
+    "date": "2026-09-06",
+    "reviewed": 12,
+    "sourceReported": 606,
+    "held": 74,
+    "productionApplied": false,
+    "note": "Bulk source records are not independently verified. Four known amount conflicts use reviewed overrides. Ambiguous OEL and missing Metsa were individually resolved. No new players imported."
   }
 }

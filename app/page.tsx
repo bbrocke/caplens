@@ -124,9 +124,7 @@ export default async function Home() {
                 <td className="p-4">{player.years}</td>
                 <td className="p-4">{player.clause}</td>
                 <td className="p-4 capitalize">
-                  {player.seasonStatus === "active"
-                    ? player.capStatus
-                    : player.seasonStatus}
+                  {player.rosterNote}
                 </td>
               </tr>
             ))}

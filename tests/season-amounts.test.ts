@@ -53,9 +53,9 @@ test("bonus-inclusive AAV, entry-level term and remaining seasons stay distinct"
   assert.equal(formatPlayer(player(8479656), 2026).capHit, 812500);
 });
 
-test("reviewed dataset has ten unique sourced player-season records", () => {
-  assert.equal(verified.length, 10);
-  assert.equal(new Set(verified.map((row) => `${row.nhlPlayerId}:${row.season}`)).size, 10);
+test("reviewed dataset has twelve unique sourced player-season records", () => {
+  assert.equal(verified.length, 12);
+  assert.equal(new Set(verified.map((row) => `${row.nhlPlayerId}:${row.season}`)).size, 12);
   for (const row of verified) {
     assert.equal(row.season, 2026);
     assert.ok(row.capHit > 0);

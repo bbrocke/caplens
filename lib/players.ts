@@ -1,3 +1,5 @@
+import reportedSeasons from "./reported-contract-seasons.json";
+import rosterCorrections from "./current-roster-corrections.json";
 import verifiedSeasons from "./verified-contract-seasons.json";
 import { getSupabase } from "@/lib/supabaseClient";
 
@@ -17,13 +19,15 @@ export type Player = {
   yearsRemaining: number | string;
   contractPeriod: string;
   amountSource: string | null;
+  amountReview: "individual" | "source" | "historical" | "unknown";
+  rosterNote: string;
   clause: string;
   capPercent: string;
   seasonStatus: SeasonStatus;
   capStatus: CapStatus;
 };
 
-export type SeasonStatus = "active" | "inactive" | "retired" | "deceased";
+export type SeasonStatus = "active" | "inactive" | "retired" | "deceased" | "overseas";
 export type CapStatus =
   | "active"
   | "ltir"
@@ -108,9 +112,13 @@ export function formatMoney(value: number | null): string {
 }
 
 export function formatPlayer(row: PlayerRow, season = SEASON_START): Player {
-  const contract = currentContract(row.contracts, season);
+  const correction = rosterCorrections.find((entry) => entry.nhlPlayerId === row.nhl_player_id);
+  const status = season === 2026 ? correction?.status : null;
+  const noCurrentContract = Boolean(status);
+  const contract = noCurrentContract ? null : currentContract(row.contracts, season);
   const verified = verifiedSeasons.filter((entry) => entry.nhlPlayerId === row.nhl_player_id && entry.season === season);
-  const amounts = verified.length === 1 ? verified[0] : null;
+  const reported = reportedSeasons.filter((entry) => entry.nhlPlayerId === row.nhl_player_id && entry.season === season);
+  const amounts = noCurrentContract ? null : verified.length === 1 ? verified[0] : verified.length === 0 && reported.length === 1 ? reported[0] : null;
   // Database amounts were imported as contract summaries for 2025–26 only.
   // Never carry them forward into an unverified season.
   const metadata = amounts && (contract?.start_season !== amounts.startSeason || contract?.end_season !== amounts.endSeason) ? null : contract;
@@ -123,7 +131,7 @@ export function formatPlayer(row: PlayerRow, season = SEASON_START): Player {
   return {
     id: row.id,
     name: row.full_name,
-    team: row.teams?.abbreviation || "-",
+    team: correction ? correction.team ?? "Free agent" : row.teams?.abbreviation || "-",
     teamCapLimit,
     position: row.position || "-",
     capHit,
@@ -132,9 +140,15 @@ export function formatPlayer(row: PlayerRow, season = SEASON_START): Player {
     yearsRemaining: end && seasonStart(end) !== null ? seasonStart(end)! - season + 1 : "Unknown",
     contractPeriod: start && end ? `${start} – ${end}` : "No unique dated contract for this season",
     amountSource: amounts?.source ?? null,
+    amountReview: amounts ? (verified.length === 1 ? "individual" : "source") : legacy ? "historical" : "unknown",
+    rosterNote: status === "unsigned_rfa" ? "Unsigned RFA · team retains NHL rights"
+      : status === "unsigned_ufa" ? "Unrestricted free agent"
+      : status === "overseas" ? "Playing overseas · NHL rights retained separately"
+      : status === "retired" ? "Retired"
+      : amounts ? "Under contract · NHL roster slot unverified" : "Roster status unverified",
     clause: metadata?.clause_type || "Unknown",
     capPercent: capHit === null ? "Unknown" : ((capHit / teamCapLimit) * 100).toFixed(1),
-    seasonStatus: row.season_status || "active",
+    seasonStatus: status === "retired" || status === "overseas" ? status : row.season_status || "active",
     // A verified contract establishes amounts, not an active NHL roster slot.
     capStatus: metadata?.cap_status || (amounts || contract ? "unknown" : "none"),
   };
