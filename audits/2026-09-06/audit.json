@@ -388,5 +388,189 @@
   ],
   "ambiguous": [],
   "sourceDuplicates": {},
-  "sourceOnly": 575
+  "sourceOnly": 575,
+  "individualReview": {
+    "checkedAt": "2026-09-06",
+    "productionApplied": false,
+    "scope": "All 18 previously unexplained absences individually searched. Affiliation/contract evidence does not establish why the API omitted a player or prove an active NHL roster slot.",
+    "summary": {
+      "unsigned_rfa": 5,
+      "signed_affiliation": 10,
+      "unsigned_ufa": 1,
+      "overseas": 2
+    },
+    "players": [
+      {
+        "name": "Adam Fantilli",
+        "storedTeam": "CBJ",
+        "classification": "unsigned_rfa",
+        "finding": "Unsigned RFA; retain Columbus rights affiliation; no current signed cap hit.",
+        "sources": [
+          "https://puckpedia.com/player/adam-fantilli"
+        ]
+      },
+      {
+        "name": "Alexander Nikishin",
+        "storedTeam": "CAR",
+        "classification": "unsigned_rfa",
+        "finding": "Unsigned RFA; retain Carolina rights affiliation; no current signed cap hit.",
+        "sources": [
+          "https://puckpedia.com/player/alexander-nikishin"
+        ]
+      },
+      {
+        "name": "Ben McCartney",
+        "storedTeam": "UTA",
+        "classification": "signed_affiliation",
+        "finding": "Utah two-year contract announced June 2025. Keep affiliation; current NHL roster slot unverified.",
+        "sources": [
+          "https://www.nhl.com/utah/news/utah-signs-ben-mccartney-to-two-year-two-way-contract-release-6-11-25"
+        ]
+      },
+      {
+        "name": "Cam Hebig",
+        "storedTeam": "UTA",
+        "classification": "signed_affiliation",
+        "finding": "Utah two-year deal announced July 2025. Keep affiliation; current NHL roster slot unverified.",
+        "sources": [
+          "https://www.nhl.com/utah/news/utah-signs-cameron-hebig-to-two-year-two-way-contract-release-7-17-25"
+        ]
+      },
+      {
+        "name": "Cutter Gauthier",
+        "storedTeam": "ANA",
+        "classification": "unsigned_rfa",
+        "finding": "Unsigned RFA; retain Anaheim rights affiliation; no current signed cap hit.",
+        "sources": [
+          "https://puckpedia.com/player/cutter-gauthier"
+        ]
+      },
+      {
+        "name": "David Gustafsson",
+        "storedTeam": "PIT",
+        "classification": "signed_affiliation",
+        "finding": "Pittsburgh signed him through 2026–27 at $850,000. Keep affiliation; roster slot unverified.",
+        "sources": [
+          "https://www.nhl.com/penguins/news/penguins-avoid-arbitration-and-agree-to-contracts-with-four-players"
+        ]
+      },
+      {
+        "name": "Ethan Del Mastro",
+        "storedTeam": "CHI",
+        "classification": "unsigned_rfa",
+        "finding": "Unsigned RFA; retain Chicago rights affiliation; no current signed cap hit.",
+        "sources": [
+          "https://puckpedia.com/player/ethan-del-mastro"
+        ]
+      },
+      {
+        "name": "Filip Hallander",
+        "storedTeam": "PIT",
+        "classification": "signed_affiliation",
+        "finding": "Pittsburgh contract through 2026–27. Keep affiliation; do not infer current injury status from old reports.",
+        "sources": [
+          "https://www.nhl.com/penguins/news/penguins-sign-forward-filip-hallander-to-a-two-year-contract"
+        ]
+      },
+      {
+        "name": "Ilya Solovyov",
+        "storedTeam": "PIT",
+        "classification": "signed_affiliation",
+        "finding": "Pittsburgh extension confirmed May 2026. Keep affiliation; current NHL roster slot unverified.",
+        "sources": [
+          "https://www.nhl.com/penguins/news/penguins-re-sign-forward-connor-dewar-and-defenseman-ilya-solovyov"
+        ]
+      },
+      {
+        "name": "Jake Livanavage",
+        "storedTeam": "PIT",
+        "classification": "signed_affiliation",
+        "finding": "Pittsburgh entry-level signing confirmed April 2026. Keep affiliation; roster slot unverified.",
+        "sources": [
+          "https://www.nhl.com/penguins/news/penguins-sign-defenseman-jake-livanavage-to-a-two-year-entry-level-contract"
+        ]
+      },
+      {
+        "name": "Jaxson Stauber",
+        "storedTeam": "UTA",
+        "classification": "signed_affiliation",
+        "finding": "Utah two-year contract announced April 2025. Keep affiliation; current NHL roster slot unverified.",
+        "sources": [
+          "https://www.nhl.com/utah/news/utah-signs-stauber-to-two-year-two-way-contract-release-4-29-25"
+        ]
+      },
+      {
+        "name": "Jonathan Drouin",
+        "storedTeam": "STL",
+        "classification": "unsigned_ufa",
+        "finding": "Listed as UFA after Blues buyout process. Remove current STL playing affiliation; preserve historical contract and review buyout charges.",
+        "sources": [
+          "https://puckpedia.com/player/jonathan-drouin",
+          "https://www.nhl.com/blues/news/blues-make-qualifying-offers-to-2-rfas"
+        ]
+      },
+      {
+        "name": "Oskar Pettersson",
+        "storedTeam": "OTT",
+        "classification": "signed_affiliation",
+        "finding": "Ottawa contract listed through 2026–27. Keep affiliation; roster slot unverified. Do not erase entry-level slide years.",
+        "sources": [
+          "https://puckpedia.com/player/oskar-pettersson",
+          "https://www.nhl.com/senators/news/senators-sign-forward-oskar-pettersson-to-a-three-year-entry-level-con-344889886"
+        ]
+      },
+      {
+        "name": "Ryan Graves",
+        "storedTeam": "PIT",
+        "classification": "signed_affiliation",
+        "finding": "Pittsburgh contract remains listed through 2028–29, with AHL affiliation. Keep contract; NHL roster slot unverified. Buyout speculation is not a transaction.",
+        "sources": [
+          "https://puckpedia.com/player/ryan-graves"
+        ]
+      },
+      {
+        "name": "Simon Edvinsson",
+        "storedTeam": "DET",
+        "classification": "unsigned_rfa",
+        "finding": "Unsigned RFA; retain Detroit rights affiliation; no current signed cap hit.",
+        "sources": [
+          "https://puckpedia.com/player/simon-edvinsson"
+        ]
+      },
+      {
+        "name": "Tyler Boucher",
+        "storedTeam": "OTT",
+        "classification": "signed_affiliation",
+        "finding": "Ottawa one-year two-way signing confirmed July 2026. Keep affiliation; current NHL roster slot unverified.",
+        "sources": [
+          "https://www.nhl.com/senators/news/senators-agree-to-terms-with-forward-tyler-boucher-on-a-one-year-two-way-contract"
+        ]
+      },
+      {
+        "name": "Vyacheslav Buteyets",
+        "storedTeam": "ANA",
+        "classification": "overseas",
+        "finding": "Shanghai loan announced July 24, 2026. Classify overseas; preserve Anaheim rights separately. Club page available via indexed search only.",
+        "sources": [
+          "https://hc-dragons.com/news/vyacheslav-buteecz-perehodit-v-shanhaj-dregons-na-pravah-arendy/",
+          "https://www.prohockeyrumors.com/2026/07/ducks-rfa-vyacheslav-buteyets-signs-in-khl.html"
+        ]
+      },
+      {
+        "name": "Zakhar Bardakov",
+        "storedTeam": "COL",
+        "classification": "overseas",
+        "finding": "SKA announced a deal through 2026–27. Classify overseas; preserve Colorado rights separately. Club page available via indexed search only.",
+        "sources": [
+          "https://www.ska.ru/news/view/485765-ska-podpisal-kontrakt-s-zakharom-bardakovym/",
+          "https://www.prohockeyrumors.com/2026/07/zakhar-bardakov-expected-to-sign-in-khl.html"
+        ]
+      }
+    ],
+    "releaseRequirements": [
+      "Represent NHL rights separately from current playing team.",
+      "Represent contract status separately from NHL roster status.",
+      "Revalidate signed cap amounts and 2026–27 coverage before applying database corrections."
+    ]
+  }
 }
