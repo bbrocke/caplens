@@ -1,4 +1,6 @@
 import {
+  DISPLAY_SEASON,
+  formatMoney,
   fetchPlayers,
   computeTeamBreakdown,
   clampPercent,
@@ -21,7 +23,7 @@ export default async function Home() {
     <main className="min-h-screen bg-slate-950 p-8 text-white">
       <h1 className="text-4xl font-bold">CapLens</h1>
       <p className="mt-2 text-slate-400">
-        NHL Contract Comparison Tool
+        NHL Contract Comparison Tool · {DISPLAY_SEASON}
       </p>
 
       <section className="mt-8 rounded-2xl border border-slate-800 bg-slate-900 p-6">
@@ -29,7 +31,7 @@ export default async function Home() {
         <p className="mt-2 text-sm text-slate-400">
           Loaded player cap hits versus the $95.5M Upper Limit. This is not
           official cap-space accounting and excludes adjustments such as LTIR,
-          retained salary, and dead cap.
+          retained salary, and dead cap. Missing or ambiguous season contracts are excluded; totals may be incomplete. Team assignments reflect the loaded roster, not a verified historical snapshot.
         </p>
 
         <div className="mt-6 grid gap-4 md:grid-cols-3">
@@ -75,7 +77,7 @@ export default async function Home() {
             </div>
 
             <p className="mt-2 text-2xl font-bold">
-              {player.capPercent}%
+              {player.capPercent}{player.capHit !== null ? "%" : ""}
             </p>
 
             <p className="text-sm text-slate-400">
@@ -102,7 +104,7 @@ export default async function Home() {
               <th className="p-4">Cap Hit</th>
               <th className="p-4">AAV</th>
               <th className="p-4">Cap %</th>
-              <th className="p-4">Years</th>
+              <th className="p-4">Contract term (years)</th>
               <th className="p-4">Clause</th>
               <th className="p-4">Status</th>
             </tr>
@@ -114,9 +116,9 @@ export default async function Home() {
                 <td className="p-4 font-medium">{player.name}</td>
                 <td className="p-4">{player.team}</td>
                 <td className="p-4">{player.position}</td>
-                <td className="p-4">${player.capHit.toLocaleString()}</td>
-                <td className="p-4">${player.aav.toLocaleString()}</td>
-                <td className="p-4">{player.capPercent}%</td>
+                <td className="p-4">{formatMoney(player.capHit)}</td>
+                <td className="p-4">{formatMoney(player.aav)}</td>
+                <td className="p-4">{player.capPercent}{player.capHit !== null ? "%" : ""}</td>
                 <td className="p-4">{player.years}</td>
                 <td className="p-4">{player.clause}</td>
                 <td className="p-4 capitalize">

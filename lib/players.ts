@@ -2,6 +2,8 @@ import { getSupabase } from "@/lib/supabaseClient";
 
 // 2025–26 Upper Limit, matching the season and limit shown on the dashboard.
 // Used only when a team's cap_limit isn't set in the database.
+export const DISPLAY_SEASON = "2025–26";
+export const SEASON_START = 2025;
 const FALLBACK_TEAM_CAP = 95_500_000;
 
 export type Player = {
@@ -10,9 +12,11 @@ export type Player = {
   team: string;
   teamCapLimit: number;
   position: string;
-  capHit: number;
-  aav: number;
+  capHit: number | null;
+  aav: number | null;
   years: number | string;
+  yearsRemaining: number | string;
+  contractPeriod: string;
   clause: string;
   capPercent: string;
   seasonStatus: SeasonStatus;
@@ -37,11 +41,12 @@ export type TeamBreakdown = {
   usedPercent: string;
 };
 
-type ContractRow = {
+export type ContractRow = {
   cap_hit: number | null;
   aav: number | null;
   years: number | null;
   clause_type: string | null;
+  start_season: string | null;
   end_season: string | null;
   cap_status: Exclude<CapStatus, "none"> | null;
 };
@@ -69,25 +74,41 @@ const PLAYERS_QUERY = `
     aav,
     years,
     clause_type,
-    end_season
-    ,cap_status
+    start_season,
+    end_season,
+    cap_status
   )
 `;
 
-// Picks the contract with the latest end_season, since a player can have
-// past contracts on record and Supabase doesn't guarantee row order here.
-function currentContract(contracts: ContractRow[] | null): ContractRow | null {
-  if (!contracts || contracts.length === 0) return null;
+// Invalid or missing dates cannot establish which season a contract covers.
+export function seasonStart(value: string | null): number | null {
+  const match = value?.match(/^(\d{4})[-–](\d{2}|\d{4})$/);
+  if (!match) return null;
+  const start = Number(match[1]);
+  const end = Number(match[2]);
+  return end === (match[2].length === 2 ? (start + 1) % 100 : start + 1) ? start : null;
+}
 
-  return [...contracts].sort((a, b) =>
-    (b.end_season || "").localeCompare(a.end_season || "")
-  )[0];
+export function currentContract(contracts: ContractRow[] | null): ContractRow | null {
+  const matches = (contracts || []).filter((contract) => {
+    const start = seasonStart(contract.start_season);
+    const end = seasonStart(contract.end_season);
+    return start !== null && end !== null && start <= SEASON_START && end >= SEASON_START;
+  });
+  // Overlapping records are ambiguous; do not silently pick one.
+  return matches.length === 1 ? matches[0] : null;
+}
+
+export function formatMoney(value: number | null): string {
+  return value === null ? "Unknown" : new Intl.NumberFormat("en-US", {
+    style: "currency", currency: "USD", maximumFractionDigits: 0,
+  }).format(value);
 }
 
 function formatPlayer(row: PlayerRow): Player {
   const contract = currentContract(row.contracts);
   const teamCapLimit = row.teams?.cap_limit || FALLBACK_TEAM_CAP;
-  const capHit = Number(contract?.cap_hit || 0);
+  const capHit = contract?.cap_hit == null ? null : Number(contract.cap_hit);
 
   return {
     id: row.id,
@@ -96,10 +117,12 @@ function formatPlayer(row: PlayerRow): Player {
     teamCapLimit,
     position: row.position || "-",
     capHit,
-    aav: Number(contract?.aav || 0),
-    years: contract?.years ?? "-",
-    clause: contract?.clause_type || "None",
-    capPercent: ((capHit / teamCapLimit) * 100).toFixed(1),
+    aav: contract?.aav == null ? null : Number(contract.aav),
+    years: contract?.years ?? "Unknown",
+    yearsRemaining: contract ? seasonStart(contract.end_season)! - SEASON_START + 1 : "Unknown",
+    contractPeriod: contract ? `${contract.start_season} – ${contract.end_season}` : "No unique dated contract for this season",
+    clause: contract?.clause_type || "Unknown",
+    capPercent: capHit === null ? "Unknown" : ((capHit / teamCapLimit) * 100).toFixed(1),
     seasonStatus: row.season_status || "active",
     capStatus: contract?.cap_status || (contract ? "unknown" : "none"),
   };
@@ -144,7 +167,7 @@ export function computeTeamBreakdown(players: Player[]): TeamBreakdown[] {
       };
     }
 
-    acc[player.team].usedCap += player.capHit;
+    acc[player.team].usedCap += player.capHit ?? 0;
     return acc;
   }, {});
 
