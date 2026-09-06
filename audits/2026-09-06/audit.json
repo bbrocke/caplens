@@ -572,5 +572,139 @@
       "Represent contract status separately from NHL roster status.",
       "Revalidate signed cap amounts and 2026–27 coverage before applying database corrections."
     ]
+  },
+  "contractReview": {
+    "checkedAt": "2026-09-06",
+    "season": "2026-27",
+    "productionApplied": false,
+    "conclusion": "All ten have publicly documented contracts covering 2026–27. Season-specific monetary values verified against PuckPedia contract tables; club announcements support signings. NHL roster-slot verification is separate.",
+    "players": [
+      {
+        "name": "Ben McCartney",
+        "team": "UTA",
+        "startSeason": "2025-26",
+        "endSeason": "2026-27",
+        "termYears": 2,
+        "seasonsRemaining": 1,
+        "seasonCapHit": 850000,
+        "sourceSeasonAav": 850000,
+        "source": "https://puckpedia.com/player/ben-mccartney/contracts",
+        "note": "Season table: $775,000 then $850,000; summary says $812,500. Original announcement predates the higher minimum."
+      },
+      {
+        "name": "Cam Hebig",
+        "team": "UTA",
+        "startSeason": "2025-26",
+        "endSeason": "2026-27",
+        "termYears": 2,
+        "seasonsRemaining": 1,
+        "seasonCapHit": 812500,
+        "sourceSeasonAav": 812500,
+        "source": "https://puckpedia.com/player/cameron-hebig/contracts",
+        "note": "Season cap hit stays $812,500 although 2026–27 base salary is $850,000."
+      },
+      {
+        "name": "David Gustafsson",
+        "team": "PIT",
+        "startSeason": "2026-27",
+        "endSeason": "2026-27",
+        "termYears": 1,
+        "seasonsRemaining": 1,
+        "seasonCapHit": 850000,
+        "sourceSeasonAav": 850000,
+        "source": "https://puckpedia.com/player/david-gustafsson/contracts",
+        "note": "Use July 2026 signing, not expired Winnipeg deal."
+      },
+      {
+        "name": "Filip Hallander",
+        "team": "PIT",
+        "startSeason": "2025-26",
+        "endSeason": "2026-27",
+        "termYears": 2,
+        "seasonsRemaining": 1,
+        "seasonCapHit": 850000,
+        "sourceSeasonAav": 850000,
+        "source": "https://puckpedia.com/player/filip-hallander/contracts",
+        "note": "Season table: $775,000 then $850,000; summary says $812,500."
+      },
+      {
+        "name": "Ilya Solovyov",
+        "team": "PIT",
+        "startSeason": "2026-27",
+        "endSeason": "2026-27",
+        "termYears": 1,
+        "seasonsRemaining": 1,
+        "seasonCapHit": 850000,
+        "sourceSeasonAav": 850000,
+        "source": "https://puckpedia.com/player/ilya-solovyov/contracts",
+        "note": "Use May 2026 extension, not expired Calgary deal."
+      },
+      {
+        "name": "Jake Livanavage",
+        "team": "PIT",
+        "startSeason": "2025-26",
+        "endSeason": "2026-27",
+        "termYears": 2,
+        "seasonsRemaining": 1,
+        "seasonCapHit": 975000,
+        "sourceSeasonAav": 1100000,
+        "source": "https://puckpedia.com/player/jake-livanavage/contracts",
+        "note": "Source lists cap hit separately from bonus-inclusive AAV; 2026–27 performance bonus potential is $250,000."
+      },
+      {
+        "name": "Jaxson Stauber",
+        "team": "UTA",
+        "startSeason": "2025-26",
+        "endSeason": "2026-27",
+        "termYears": 2,
+        "seasonsRemaining": 1,
+        "seasonCapHit": 850000,
+        "sourceSeasonAav": 850000,
+        "source": "https://puckpedia.com/player/jaxson-stauber/contracts",
+        "note": "Season table: $775,000 then $850,000; summary says $812,500."
+      },
+      {
+        "name": "Oskar Pettersson",
+        "team": "OTT",
+        "startSeason": "2023-24",
+        "endSeason": "2026-27",
+        "termYears": 3,
+        "seasonsRemaining": 1,
+        "seasonCapHit": 910000,
+        "sourceSeasonAav": 945000,
+        "source": "https://puckpedia.com/player/oskar-pettersson/contracts",
+        "note": "Three-year ELC spans four listed seasons. Source shows varying cap hits; preserve slide history and bonus distinction."
+      },
+      {
+        "name": "Ryan Graves",
+        "team": "PIT",
+        "startSeason": "2023-24",
+        "endSeason": "2028-29",
+        "termYears": 6,
+        "seasonsRemaining": 3,
+        "seasonCapHit": 4500000,
+        "sourceSeasonAav": 4500000,
+        "source": "https://puckpedia.com/player/ryan-graves/contracts",
+        "note": "Three seasons remain including 2026–27. Contract amount is not the net team cap charge if assigned to minors."
+      },
+      {
+        "name": "Tyler Boucher",
+        "team": "OTT",
+        "startSeason": "2026-27",
+        "endSeason": "2026-27",
+        "termYears": 1,
+        "seasonsRemaining": 1,
+        "seasonCapHit": 850000,
+        "sourceSeasonAav": 850000,
+        "source": "https://puckpedia.com/player/tyler-boucher/contracts",
+        "note": "Use July 2026 signing, not expired entry-level deal."
+      }
+    ],
+    "implementationRequirements": [
+      "Store season-specific cap hits; do not use contract-summary averages for every season.",
+      "Keep bonus-inclusive source AAV separate from cap hit.",
+      "Preserve prior contracts when adding Gustafsson, Solovyov and Boucher extensions.",
+      "Do not infer active NHL roster slots or net team charges from contract verification."
+    ]
   }
 }
