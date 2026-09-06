@@ -17,7 +17,8 @@ export default async function Home() {
   }
 
   const players = allPlayers.filter(isOnActiveRoster);
-  const teamBreakdown = computeTeamBreakdown(players);
+  const amountsComplete = players.length > 0 && players.every((player) => player.capHit !== null);
+  const teamBreakdown = amountsComplete ? computeTeamBreakdown(players) : [];
 
   return (
     <main className="min-h-screen bg-slate-950 p-8 text-white">
@@ -29,11 +30,12 @@ export default async function Home() {
       <section className="mt-8 rounded-2xl border border-slate-800 bg-slate-900 p-6">
         <h2 className="text-2xl font-bold">Gross Roster Contract Totals</h2>
         <p className="mt-2 text-sm text-slate-400">
-          Loaded player cap hits versus the $95.5M Upper Limit. This is not
+          Loaded player cap hits versus the $104M Upper Limit. This is not
           official cap-space accounting and excludes adjustments such as LTIR,
           retained salary, and dead cap. Missing or ambiguous season contracts are excluded; totals may be incomplete. Team assignments reflect the loaded roster, not a verified historical snapshot.
         </p>
 
+        {!amountsComplete && <p className="mt-4 text-amber-200">Team totals are unavailable while season amounts are being verified. Compare individual verified contracts on the comparison page.</p>}
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           {teamBreakdown.map((team) => (
             <div

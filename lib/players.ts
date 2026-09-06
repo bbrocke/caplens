@@ -1,10 +1,9 @@
+import verifiedSeasons from "./verified-contract-seasons.json";
 import { getSupabase } from "@/lib/supabaseClient";
 
-// 2025–26 Upper Limit, matching the season and limit shown on the dashboard.
-// Used only when a team's cap_limit isn't set in the database.
-export const DISPLAY_SEASON = "2025–26";
-export const SEASON_START = 2025;
-const FALLBACK_TEAM_CAP = 95_500_000;
+export const DISPLAY_SEASON = "2026–27";
+export const SEASON_START = 2026;
+export const SEASON_CAPS: Record<number, number> = { 2025: 95_500_000, 2026: 104_000_000 };
 
 export type Player = {
   id: string;
@@ -17,6 +16,7 @@ export type Player = {
   years: number | string;
   yearsRemaining: number | string;
   contractPeriod: string;
+  amountSource: string | null;
   clause: string;
   capPercent: string;
   seasonStatus: SeasonStatus;
@@ -51,7 +51,8 @@ export type ContractRow = {
   cap_status: Exclude<CapStatus, "none"> | null;
 };
 
-type PlayerRow = {
+export type PlayerRow = {
+  nhl_player_id?: number | null;
   id: string;
   full_name: string;
   position: string | null;
@@ -63,6 +64,7 @@ type PlayerRow = {
 const PLAYERS_QUERY = `
   id,
   full_name,
+  nhl_player_id,
   position,
   season_status,
   teams:team_id (
@@ -89,11 +91,11 @@ export function seasonStart(value: string | null): number | null {
   return end === (match[2].length === 2 ? (start + 1) % 100 : start + 1) ? start : null;
 }
 
-export function currentContract(contracts: ContractRow[] | null): ContractRow | null {
+export function currentContract(contracts: ContractRow[] | null, season = SEASON_START): ContractRow | null {
   const matches = (contracts || []).filter((contract) => {
     const start = seasonStart(contract.start_season);
     const end = seasonStart(contract.end_season);
-    return start !== null && end !== null && start <= SEASON_START && end >= SEASON_START;
+    return start !== null && end !== null && start <= season && end >= season;
   });
   // Overlapping records are ambiguous; do not silently pick one.
   return matches.length === 1 ? matches[0] : null;
@@ -105,11 +107,19 @@ export function formatMoney(value: number | null): string {
   }).format(value);
 }
 
-function formatPlayer(row: PlayerRow): Player {
-  const contract = currentContract(row.contracts);
-  const teamCapLimit = row.teams?.cap_limit || FALLBACK_TEAM_CAP;
-  const capHit = contract?.cap_hit == null ? null : Number(contract.cap_hit);
-
+export function formatPlayer(row: PlayerRow, season = SEASON_START): Player {
+  const contract = currentContract(row.contracts, season);
+  const verified = verifiedSeasons.filter((entry) => entry.nhlPlayerId === row.nhl_player_id && entry.season === season);
+  const amounts = verified.length === 1 ? verified[0] : null;
+  // Database amounts were imported as contract summaries for 2025–26 only.
+  // Never carry them forward into an unverified season.
+  const metadata = amounts && (contract?.start_season !== amounts.startSeason || contract?.end_season !== amounts.endSeason) ? null : contract;
+  const legacy = season === 2025 ? contract : null;
+  const capHit = amounts?.capHit ?? (legacy?.cap_hit == null ? null : Number(legacy.cap_hit));
+  const start = amounts?.startSeason ?? contract?.start_season;
+  const end = amounts?.endSeason ?? contract?.end_season;
+  const teamCapLimit = SEASON_CAPS[season];
+  if (!teamCapLimit) throw new Error(`Unsupported contract season: ${season}`);
   return {
     id: row.id,
     name: row.full_name,
@@ -117,18 +127,20 @@ function formatPlayer(row: PlayerRow): Player {
     teamCapLimit,
     position: row.position || "-",
     capHit,
-    aav: contract?.aav == null ? null : Number(contract.aav),
-    years: contract?.years ?? "Unknown",
-    yearsRemaining: contract ? seasonStart(contract.end_season)! - SEASON_START + 1 : "Unknown",
-    contractPeriod: contract ? `${contract.start_season} – ${contract.end_season}` : "No unique dated contract for this season",
-    clause: contract?.clause_type || "Unknown",
+    aav: amounts?.aav ?? (legacy?.aav == null ? null : Number(legacy.aav)),
+    years: amounts?.termYears ?? contract?.years ?? "Unknown",
+    yearsRemaining: end && seasonStart(end) !== null ? seasonStart(end)! - season + 1 : "Unknown",
+    contractPeriod: start && end ? `${start} – ${end}` : "No unique dated contract for this season",
+    amountSource: amounts?.source ?? null,
+    clause: metadata?.clause_type || "Unknown",
     capPercent: capHit === null ? "Unknown" : ((capHit / teamCapLimit) * 100).toFixed(1),
     seasonStatus: row.season_status || "active",
-    capStatus: contract?.cap_status || (contract ? "unknown" : "none"),
+    // A verified contract establishes amounts, not an active NHL roster slot.
+    capStatus: metadata?.cap_status || (amounts || contract ? "unknown" : "none"),
   };
 }
 
-export async function fetchPlayers(): Promise<{
+export async function fetchPlayers(season = SEASON_START): Promise<{
   players: Player[];
   error: string | null;
 }> {
@@ -147,7 +159,7 @@ export async function fetchPlayers(): Promise<{
   }
 
   return {
-    players: ((data as unknown as PlayerRow[]) || []).map(formatPlayer),
+    players: ((data as unknown as PlayerRow[]) || []).map((row) => formatPlayer(row, season)),
     error: null,
   };
 }

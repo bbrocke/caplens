@@ -9,21 +9,21 @@ const contract = (start: string | null, end: string | null): ContractRow => ({
 test("selects the season contract instead of a future extension", () => {
   const active = contract("2023-24", "2025-26");
   const future = contract("2026-27", "2033-34");
-  assert.equal(currentContract([future, active]), active);
-  assert.equal(currentContract([active, future]), active);
+  assert.equal(currentContract([future, active], 2025), active);
+  assert.equal(currentContract([active, future], 2025), active);
 });
 test("includes the first and final season", () => {
   const first = contract("2025-26", "2027-28");
   const last = contract("2023-24", "2025-26");
-  assert.equal(currentContract([first]), first);
-  assert.equal(currentContract([last]), last);
+  assert.equal(currentContract([first], 2025), first);
+  assert.equal(currentContract([last], 2025), last);
 });
 test("does not guess for missing, expired, malformed or overlapping dates", () => {
   for (const rows of [null, [], [contract(null, "2026-27")],
     [contract("2020-21", "2024-25")], [contract("2026-27", "2030-31")],
     [contract("2025-99", "2027-28")],
     [contract("2024-25", "2026-27"), contract("2025-26", "2027-28")]]) {
-    assert.equal(currentContract(rows), null);
+    assert.equal(currentContract(rows, 2025), null);
   }
 });
 test("accepts valid season formats and distinguishes unknown amounts from zero", () => {

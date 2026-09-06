@@ -1,0 +1,112 @@
+[
+  {
+    "nhlPlayerId": 8481827,
+    "season": 2026,
+    "startSeason": "2025-26",
+    "endSeason": "2026-27",
+    "termYears": 2,
+    "capHit": 850000,
+    "aav": 850000,
+    "source": "https://puckpedia.com/player/ben-mccartney/contracts",
+    "verifiedAt": "2026-09-06"
+  },
+  {
+    "nhlPlayerId": 8479656,
+    "season": 2026,
+    "startSeason": "2025-26",
+    "endSeason": "2026-27",
+    "termYears": 2,
+    "capHit": 812500,
+    "aav": 812500,
+    "source": "https://puckpedia.com/player/cameron-hebig/contracts",
+    "verifiedAt": "2026-09-06"
+  },
+  {
+    "nhlPlayerId": 8481019,
+    "season": 2026,
+    "startSeason": "2026-27",
+    "endSeason": "2026-27",
+    "termYears": 1,
+    "capHit": 850000,
+    "aav": 850000,
+    "source": "https://puckpedia.com/player/david-gustafsson/contracts",
+    "verifiedAt": "2026-09-06"
+  },
+  {
+    "nhlPlayerId": 8480842,
+    "season": 2026,
+    "startSeason": "2025-26",
+    "endSeason": "2026-27",
+    "termYears": 2,
+    "capHit": 850000,
+    "aav": 850000,
+    "source": "https://puckpedia.com/player/filip-hallander/contracts",
+    "verifiedAt": "2026-09-06"
+  },
+  {
+    "nhlPlayerId": 8482470,
+    "season": 2026,
+    "startSeason": "2026-27",
+    "endSeason": "2026-27",
+    "termYears": 1,
+    "capHit": 850000,
+    "aav": 850000,
+    "source": "https://puckpedia.com/player/ilya-solovyov/contracts",
+    "verifiedAt": "2026-09-06"
+  },
+  {
+    "nhlPlayerId": 8486169,
+    "season": 2026,
+    "startSeason": "2025-26",
+    "endSeason": "2026-27",
+    "termYears": 2,
+    "capHit": 975000,
+    "aav": 1100000,
+    "source": "https://puckpedia.com/player/jake-livanavage/contracts",
+    "verifiedAt": "2026-09-06"
+  },
+  {
+    "nhlPlayerId": 8483530,
+    "season": 2026,
+    "startSeason": "2025-26",
+    "endSeason": "2026-27",
+    "termYears": 2,
+    "capHit": 850000,
+    "aav": 850000,
+    "source": "https://puckpedia.com/player/jaxson-stauber/contracts",
+    "verifiedAt": "2026-09-06"
+  },
+  {
+    "nhlPlayerId": 8483673,
+    "season": 2026,
+    "startSeason": "2023-24",
+    "endSeason": "2026-27",
+    "termYears": 3,
+    "capHit": 910000,
+    "aav": 945000,
+    "source": "https://puckpedia.com/player/oskar-pettersson/contracts",
+    "verifiedAt": "2026-09-06"
+  },
+  {
+    "nhlPlayerId": 8477435,
+    "season": 2026,
+    "startSeason": "2023-24",
+    "endSeason": "2028-29",
+    "termYears": 6,
+    "capHit": 4500000,
+    "aav": 4500000,
+    "source": "https://puckpedia.com/player/ryan-graves/contracts",
+    "verifiedAt": "2026-09-06"
+  },
+  {
+    "nhlPlayerId": 8482674,
+    "season": 2026,
+    "startSeason": "2026-27",
+    "endSeason": "2026-27",
+    "termYears": 1,
+    "capHit": 850000,
+    "aav": 850000,
+    "source": "https://puckpedia.com/player/tyler-boucher/contracts",
+    "verifiedAt": "2026-09-06"
+  }
+]

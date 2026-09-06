@@ -120,3 +120,9 @@ All ten signed affiliations have contracts covering 2026–27. Values below are 
 - Graves remains contracted through 2028–29. His $4.5M contract cap hit is not automatically the team's net charge under an AHL assignment.
 
 These checks verify publicly reported contracts and season-table values, not access to registered SPCs or a live database correction. Signed status alone does not establish an active NHL roster slot.
+
+## Implemented season correction
+
+The draft now loads the ten reviewed 2026–27 records from `lib/verified-contract-seasons.json`, matched by NHL player ID and season. This versioned dataset preserves provenance without rewriting database history. The comparison defaults to 2026–27 and allows switching back to the original 2025–26 import. The cap denominator is tied to season ($104M or $95.5M), not the stale team cap_limit column. Unreviewed 2026–27 amounts show Unknown; incomplete team totals are withheld. Bonus-inclusive source AAV and cap hit remain separate.
+
+Validation: nine regression tests cover season changes, historic preservation, extensions, missing amounts, cap percentage, bonus distinctions and entry-level term/remaining years. Production database unchanged. This is intentionally partial amount coverage (ten contracts), not release clearance: roster corrections, broader amount coverage and mobile preview verification still remain.
