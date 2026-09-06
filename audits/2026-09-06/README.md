@@ -92,3 +92,31 @@ All 18 searched individually. Findings: 5 unsigned RFAs, 10 signed affiliations,
 | Zakhar Bardakov | overseas | SKA announced a deal through 2026–27. Classify overseas; preserve Colorado rights separately. Club page available via indexed search only. | [Source 1](https://www.ska.ru/news/view/485765-ska-podpisal-kontrakt-s-zakharom-bardakovym/); [Source 2](https://www.prohockeyrumors.com/2026/07/zakhar-bardakov-expected-to-sign-in-khl.html) |
 
 Do not use historical injuries to infer current injured-reserve status. Do not turn RFA rights affiliation into a signed contract or copy old cap hits into 2026–27. For overseas players, retain NHL rights separately from the KHL playing club. For Drouin, preserve historical and buyout accounting separately from current playing affiliation. The 10 signed affiliations still need roster-slot verification before active-roster cap totals are claimed accurate.
+
+## Contract verification — September 6, 2026
+
+All ten signed affiliations have contracts covering 2026–27. Values below are from each linked season table, not the contract summary average. Original club releases support the signings (linked in the individual review). Production unchanged; active NHL roster slots remain unverified.
+
+| Player | Team | Listed contract span | Term | 2026–27 cap hit | Seasons remaining including 2026–27 |
+|---|---|---|---|---|---|
+| [Ben McCartney](https://puckpedia.com/player/ben-mccartney/contracts) | UTA | 2025-26 to 2026-27 | 2 | $850,000 | 1 |
+| [Cam Hebig](https://puckpedia.com/player/cameron-hebig/contracts) | UTA | 2025-26 to 2026-27 | 2 | $812,500 | 1 |
+| [David Gustafsson](https://puckpedia.com/player/david-gustafsson/contracts) | PIT | 2026-27 to 2026-27 | 1 | $850,000 | 1 |
+| [Filip Hallander](https://puckpedia.com/player/filip-hallander/contracts) | PIT | 2025-26 to 2026-27 | 2 | $850,000 | 1 |
+| [Ilya Solovyov](https://puckpedia.com/player/ilya-solovyov/contracts) | PIT | 2026-27 to 2026-27 | 1 | $850,000 | 1 |
+| [Jake Livanavage](https://puckpedia.com/player/jake-livanavage/contracts) | PIT | 2025-26 to 2026-27 | 2 | $975,000 | 1 |
+| [Jaxson Stauber](https://puckpedia.com/player/jaxson-stauber/contracts) | UTA | 2025-26 to 2026-27 | 2 | $850,000 | 1 |
+| [Oskar Pettersson](https://puckpedia.com/player/oskar-pettersson/contracts) | OTT | 2023-24 to 2026-27 | 3 | $910,000 | 1 |
+| [Ryan Graves](https://puckpedia.com/player/ryan-graves/contracts) | PIT | 2023-24 to 2028-29 | 6 | $4,500,000 | 3 |
+| [Tyler Boucher](https://puckpedia.com/player/tyler-boucher/contracts) | OTT | 2026-27 to 2026-27 | 1 | $850,000 | 1 |
+
+### Corrections required in the data model
+
+- McCartney, Hallander and Stauber: summaries show $812,500, while season tables show $850,000 for 2026–27. Preserve the $775,000 prior-season amount. Older club announcements also predate the new minimum salary; do not apply their original figure to every season.
+- Hebig: $812,500 cap hit remains distinct from his $850,000 base salary.
+- Pettersson: season table shows a $910,000 cap hit and $945,000 bonus-inclusive AAV for 2026–27; the $860,000 summary is unsuitable for this season. Preserve the three-year term and slide history.
+- Livanavage: $975,000 cap hit differs from the source's $1,100,000 bonus-inclusive AAV. Do not equate these fields.
+- Gustafsson, Solovyov and Boucher have new 2026–27 deals; preserve expired contracts as history.
+- Graves remains contracted through 2028–29. His $4.5M contract cap hit is not automatically the team's net charge under an AHL assignment.
+
+These checks verify publicly reported contracts and season-table values, not access to registered SPCs or a live database correction. Signed status alone does not establish an active NHL roster slot.
