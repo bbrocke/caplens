@@ -53,12 +53,27 @@ test("bonus-inclusive AAV, entry-level term and remaining seasons stay distinct"
   assert.equal(formatPlayer(player(8479656), 2026).capHit, 812500);
 });
 
-test("reviewed dataset has twelve unique sourced player-season records", () => {
-  assert.equal(verified.length, 12);
-  assert.equal(new Set(verified.map((row) => `${row.nhlPlayerId}:${row.season}`)).size, 12);
+test("reviewed dataset has 85 unique sourced player-season records", () => {
+  assert.equal(verified.length, 85);
+  assert.equal(new Set(verified.map((row) => `${row.nhlPlayerId}:${row.season}`)).size, 85);
   for (const row of verified) {
     assert.equal(row.season, 2026);
     assert.ok(row.capHit > 0);
-    assert.ok(row.source.startsWith("https://puckpedia.com/player/"));
+    assert.ok(row.source.startsWith("https://"));
   }
+});
+
+test("held minimum and ELC-slide reviews use season-specific values", () => {
+  const aatu = formatPlayer(player(8482691), 2026);
+  assert.equal(aatu.capHit, 850000);
+  assert.equal(aatu.aav, 850000);
+
+  const frondell = formatPlayer(player(8485391), 2026);
+  assert.equal(frondell.capHit, 986250);
+  assert.equal(frondell.aav, 4136250);
+  assert.equal(frondell.years, 3);
+
+  const pettersson = formatPlayer(player(8483678), 2026);
+  assert.equal(pettersson.capHit, 913333);
+  assert.equal(pettersson.aav, 993333);
 });

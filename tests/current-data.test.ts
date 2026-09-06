@@ -42,4 +42,5 @@ test("bulk sources stay distinguished from individual reviews and held amounts",
     assert.equal(p.aav, null);
   }
   for (const entry of held) assert.equal(formatPlayer(row(entry.nhlPlayerId)).capHit, null);
+  assert.deepEqual(held.map((entry) => entry.nhlPlayerId), [8477494]);
 });

@@ -62,7 +62,7 @@ Resolved explanations: Johnny Gaudreau is already stored as deceased; Logan Cout
 - Apply and validate the individual classifications below using separate fields for playing team, NHL rights, contract status and roster status; include Kopitar's retired-status correction. Define coverage for the 575 source-only players.
 - Verify current contract coverage. The app currently selects 2025–26 contracts; current roster updates alone do not make those current-season comparisons.
 - Align contract season, remaining years, cap denominator and labels before publishing current comparisons. NHL announced a $104M upper limit for 2026–27: https://www.nhl.com/news/nhl-nhlpa-announce-team-payroll-ranges-for-next-3-seasons-through-2027-28
-- Investigate 65 previously flagged term/date-span differences; entry-level slides may be legitimate.
+- Preserve verified entry-level slide years; the 39 held slide cases were individually confirmed as legitimate.
 - Sync now defaults to current and dry-run; it validates all clubs and rejects duplicate IDs before a single atomic upsert. Validate this behavior before applying; it still treats all feed members as active, so coverage must be reviewed first.
 - Validate proposed SQL in an isolated database, run lint/build/contract regression checks after code corrections, then verify comparison on mobile before deployment.
 
@@ -131,12 +131,16 @@ Validation: nine regression tests cover season changes, historic preservation, e
 
 The app now applies 25 versioned current-roster corrections: 14 team changes, 7 unsigned-RFA classifications, 1 unsigned-UFA classification, 2 overseas classifications and Kopitar's retirement. These corrections ship with the app, so release rollback also rolls back the displayed corrections. Original database rows remain untouched. Historical season comparisons preserve the original status and amounts, with current team labels explicitly disclosed.
 
-2026–27 amount coverage expands from 10 to 618 stored players: 12 individually reviewed records plus 606 source-reported records. Bulk data comes from https://thestanleycap.com/transactions/active_contracts/20262027, retrieved September 6. The UI distinguishes bulk reporting from individual review. AAV is Unknown when the bulk source does not provide it; cap hit is never copied into AAV.
+2026–27 amount coverage expands from 10 to 691 stored players: 85 individually reviewed records plus 606 source-reported records. Bulk data comes from https://thestanleycap.com/transactions/active_contracts/20262027, retrieved September 6. The UI distinguishes bulk reporting from individual review. AAV is Unknown when the bulk source does not provide it; cap hit is never copied into AAV.
 
-The bulk source matched 690 players uniquely, but contains known stale or conflicting records. The reviewed overrides take precedence. 74 candidates are withheld (see contracts-held-for-review.json); these include one status conflict and remaining minimum-salary/ELC-date concerns. The 12 remaining stored players without accepted amounts include known unsigned, retired and overseas cases. No new prospects were added. Full league completeness is not claimed.
+The bulk source matched players uniquely, but contains known stale or conflicting records. The reviewed overrides take precedence. All 74 previously held candidates were reviewed individually: 34 minimum-salary/season-adjustment cases and 39 entry-level slide cases were resolved, while Jonathan Drouin remains excluded because unsigned-UFA status supersedes the source's bought-out contract listing. `contracts-held-for-review.json` now contains only that intentional exclusion. The remaining stored players without accepted amounts are known unsigned, retired or overseas cases. No new prospects were added. Full league completeness is not claimed.
+
+### Held-contract review
+
+The 73 eligible records now use each player's individual 2026–27 season-table values. This corrects substantial differences hidden by the bulk source, including performance-bonus AAVs and new minimum-salary adjustments. Entry-level contract start/end spans continue to include slide history while `termYears` retains the actual contract term. Sources and verification dates are stored per player in `lib/verified-contract-seasons.json`.
 
 Additional cases resolved: Zach Metsa's current deal is $850,000 through 2026–27; the $900,000 extension starts 2027–28. Oliver Ekman-Larsson's current contract is $3.5M through 2027–28; the source also incorrectly includes his bought-out $8.25M deal. Arber Xhekaj and Zachary Bolduc are marked unsigned RFAs with Montreal rights.
 
-Validation: all 13 regression tests passed, including all 14 team changes, status suppression, historical preservation, individually reviewed overrides, and every accepted/held bulk record. Incomplete team totals remain withheld. Rebuild the derived datasets with `node --import tsx scripts/build-season-data.ts`.
+Validation: regression tests cover all 14 team changes, status suppression, historical preservation, individually reviewed overrides, and every accepted/held bulk record. Incomplete team totals remain withheld. Rebuild the derived datasets with `node --import tsx scripts/build-season-data.ts`.
 
-Deployment still requires mobile/desktop preview verification. Full data clearance also requires reviewing the 74 held candidates and broader source accuracy; this draft must not be described as a fully verified all-player database. Do not run the existing live sync scripts until their status and historical-contract semantics are corrected.
+Deployment still requires mobile/desktop preview verification. The 74-record held queue is resolved, but the 606 bulk records remain source-reported rather than individually verified; this draft must not be described as a fully verified all-player database. Do not run the existing live sync scripts until their status and historical-contract semantics are corrected.

@@ -26,6 +26,6 @@ writeFileSync("audits/2026-09-06/contracts-held-for-review.json", JSON.stringify
 const audit = JSON.parse(readFileSync("audits/2026-09-06/audit.json", "utf8"));
 audit.expansion = { date: "2026-09-06", reviewed: reviewed.length, sourceReported: accepted.length,
   held: held.length, productionApplied: false,
-  note: "Bulk source records are not independently verified. Four known amount conflicts use reviewed overrides. Ambiguous OEL and missing Metsa were individually resolved. No new players imported." };
+  note: "All 73 eligible held candidates were individually reviewed and promoted to reviewed overrides. Jonathan Drouin remains excluded because unsigned-UFA status supersedes the stale bought-out contract listing. Bulk source records are not independently verified. No new players imported." };
 writeFileSync("audits/2026-09-06/audit.json", JSON.stringify(audit, null, 2) + "\n");
 console.log(audit.expansion);
