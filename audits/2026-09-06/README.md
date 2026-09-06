@@ -31,7 +31,7 @@ Reference: NHL `/v1/roster/{club}/current`, all 32 clubs retrieved on 2026-09-06
 
 Absence from the source does not establish retirement, free agency, or inactivity.
 
-Resolved explanations: Johnny Gaudreau is already stored as deceased; Logan Couture is already stored as retired. Anze Kopitar's retirement is confirmed by [NHL reporting on August 23, 2026](https://www.nhl.com/news/anze-kopitar-happy-in-retirement-after-storied-nhl-career). His stored active status needs a current-roster correction to retired, while preserving his 2025–26 playing and contract history. Production has not been changed. This leaves 18 unexplained absences. The table and audit.json preserve the original database snapshot.
+Resolved explanations: Johnny Gaudreau is already stored as deceased; Logan Couture is already stored as retired. Anze Kopitar's retirement is confirmed by [NHL reporting on August 23, 2026](https://www.nhl.com/news/anze-kopitar-happy-in-retirement-after-storied-nhl-career). His stored active status needs a current-roster correction to retired, while preserving his 2025–26 playing and contract history. Production has not been changed. All 18 remaining absences have now been individually researched; see the classifications below. The table and audit.json preserve the original database snapshot.
 
 | Player | Stored team | Stored status |
 |---|---|---|
@@ -59,9 +59,36 @@ Resolved explanations: Johnny Gaudreau is already stored as deceased; Logan Cout
 
 ## Remaining release gates
 
-- Reconcile the remaining 18 unexplained absences with official transactions or player records; prepare and validate Kopitar's retired-status correction; define coverage for the 575 source-only players.
+- Apply and validate the individual classifications below using separate fields for playing team, NHL rights, contract status and roster status; include Kopitar's retired-status correction. Define coverage for the 575 source-only players.
 - Verify current contract coverage. The app currently selects 2025–26 contracts; current roster updates alone do not make those current-season comparisons.
 - Align contract season, remaining years, cap denominator and labels before publishing current comparisons. NHL announced a $104M upper limit for 2026–27: https://www.nhl.com/news/nhl-nhlpa-announce-team-payroll-ranges-for-next-3-seasons-through-2027-28
 - Investigate 65 previously flagged term/date-span differences; entry-level slides may be legitimate.
 - Sync now defaults to current and dry-run; it validates all clubs and rejects duplicate IDs before a single atomic upsert. Validate this behavior before applying; it still treats all feed members as active, so coverage must be reviewed first.
 - Validate proposed SQL in an isolated database, run lint/build/contract regression checks after code corrections, then verify comparison on mobile before deployment.
+
+## Individual follow-up — September 6, 2026
+
+All 18 searched individually. Findings: 5 unsigned RFAs, 10 signed affiliations, 1 unsigned UFA, 2 overseas. These are draft classifications, not production changes. The API omission itself remains unexplained for signed players; an NHL contract does not prove an active roster slot. Original snapshot values above and in audit.json remain unchanged for traceability.
+
+| Player | Classification | Finding and proposed action | Evidence |
+|---|---|---|---|
+| Adam Fantilli | unsigned_rfa | Unsigned RFA; retain Columbus rights affiliation; no current signed cap hit. | [Source 1](https://puckpedia.com/player/adam-fantilli) |
+| Alexander Nikishin | unsigned_rfa | Unsigned RFA; retain Carolina rights affiliation; no current signed cap hit. | [Source 1](https://puckpedia.com/player/alexander-nikishin) |
+| Ben McCartney | signed_affiliation | Utah two-year contract announced June 2025. Keep affiliation; current NHL roster slot unverified. | [Source 1](https://www.nhl.com/utah/news/utah-signs-ben-mccartney-to-two-year-two-way-contract-release-6-11-25) |
+| Cam Hebig | signed_affiliation | Utah two-year deal announced July 2025. Keep affiliation; current NHL roster slot unverified. | [Source 1](https://www.nhl.com/utah/news/utah-signs-cameron-hebig-to-two-year-two-way-contract-release-7-17-25) |
+| Cutter Gauthier | unsigned_rfa | Unsigned RFA; retain Anaheim rights affiliation; no current signed cap hit. | [Source 1](https://puckpedia.com/player/cutter-gauthier) |
+| David Gustafsson | signed_affiliation | Pittsburgh signed him through 2026–27 at $850,000. Keep affiliation; roster slot unverified. | [Source 1](https://www.nhl.com/penguins/news/penguins-avoid-arbitration-and-agree-to-contracts-with-four-players) |
+| Ethan Del Mastro | unsigned_rfa | Unsigned RFA; retain Chicago rights affiliation; no current signed cap hit. | [Source 1](https://puckpedia.com/player/ethan-del-mastro) |
+| Filip Hallander | signed_affiliation | Pittsburgh contract through 2026–27. Keep affiliation; do not infer current injury status from old reports. | [Source 1](https://www.nhl.com/penguins/news/penguins-sign-forward-filip-hallander-to-a-two-year-contract) |
+| Ilya Solovyov | signed_affiliation | Pittsburgh extension confirmed May 2026. Keep affiliation; current NHL roster slot unverified. | [Source 1](https://www.nhl.com/penguins/news/penguins-re-sign-forward-connor-dewar-and-defenseman-ilya-solovyov) |
+| Jake Livanavage | signed_affiliation | Pittsburgh entry-level signing confirmed April 2026. Keep affiliation; roster slot unverified. | [Source 1](https://www.nhl.com/penguins/news/penguins-sign-defenseman-jake-livanavage-to-a-two-year-entry-level-contract) |
+| Jaxson Stauber | signed_affiliation | Utah two-year contract announced April 2025. Keep affiliation; current NHL roster slot unverified. | [Source 1](https://www.nhl.com/utah/news/utah-signs-stauber-to-two-year-two-way-contract-release-4-29-25) |
+| Jonathan Drouin | unsigned_ufa | Listed as UFA after Blues buyout process. Remove current STL playing affiliation; preserve historical contract and review buyout charges. | [Source 1](https://puckpedia.com/player/jonathan-drouin); [Source 2](https://www.nhl.com/blues/news/blues-make-qualifying-offers-to-2-rfas) |
+| Oskar Pettersson | signed_affiliation | Ottawa contract listed through 2026–27. Keep affiliation; roster slot unverified. Do not erase entry-level slide years. | [Source 1](https://puckpedia.com/player/oskar-pettersson); [Source 2](https://www.nhl.com/senators/news/senators-sign-forward-oskar-pettersson-to-a-three-year-entry-level-con-344889886) |
+| Ryan Graves | signed_affiliation | Pittsburgh contract remains listed through 2028–29, with AHL affiliation. Keep contract; NHL roster slot unverified. Buyout speculation is not a transaction. | [Source 1](https://puckpedia.com/player/ryan-graves) |
+| Simon Edvinsson | unsigned_rfa | Unsigned RFA; retain Detroit rights affiliation; no current signed cap hit. | [Source 1](https://puckpedia.com/player/simon-edvinsson) |
+| Tyler Boucher | signed_affiliation | Ottawa one-year two-way signing confirmed July 2026. Keep affiliation; current NHL roster slot unverified. | [Source 1](https://www.nhl.com/senators/news/senators-agree-to-terms-with-forward-tyler-boucher-on-a-one-year-two-way-contract) |
+| Vyacheslav Buteyets | overseas | Shanghai loan announced July 24, 2026. Classify overseas; preserve Anaheim rights separately. Club page available via indexed search only. | [Source 1](https://hc-dragons.com/news/vyacheslav-buteecz-perehodit-v-shanhaj-dregons-na-pravah-arendy/); [Source 2](https://www.prohockeyrumors.com/2026/07/ducks-rfa-vyacheslav-buteyets-signs-in-khl.html) |
+| Zakhar Bardakov | overseas | SKA announced a deal through 2026–27. Classify overseas; preserve Colorado rights separately. Club page available via indexed search only. | [Source 1](https://www.ska.ru/news/view/485765-ska-podpisal-kontrakt-s-zakharom-bardakovym/); [Source 2](https://www.prohockeyrumors.com/2026/07/zakhar-bardakov-expected-to-sign-in-khl.html) |
+
+Do not use historical injuries to infer current injured-reserve status. Do not turn RFA rights affiliation into a signed contract or copy old cap hits into 2026–27. For overseas players, retain NHL rights separately from the KHL playing club. For Drouin, preserve historical and buyout accounting separately from current playing affiliation. The 10 signed affiliations still need roster-slot verification before active-roster cap totals are claimed accurate.
