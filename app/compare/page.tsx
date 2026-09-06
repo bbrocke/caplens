@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { DISPLAY_SEASON, formatMoney, fetchPlayers, isOnActiveRoster, type Player } from "@/lib/players";
+import { SEASON_START, formatMoney, fetchPlayers, isOnActiveRoster, type Player } from "@/lib/players";
 import {
   Cell,
   BarChart,
@@ -22,6 +22,8 @@ const compactMoney = (value: number) =>
   }).format(value);
 
 export default function ComparePage() {
+  const [season, setSeason] = useState(SEASON_START);
+  const displaySeason = `${season}–${String(season + 1).slice(-2)}`;
   const [players, setPlayers] = useState<Player[]>([]);
   const [selected, setSelected] = useState<string[]>([]);
   const [search, setSearch] = useState("");
@@ -34,7 +36,7 @@ export default function ComparePage() {
   useEffect(() => {
     let cancelled = false;
 
-    fetchPlayers().then(({ players, error }) => {
+    fetchPlayers(season).then(({ players, error }) => {
       if (cancelled) return;
       setPlayers(players.filter(isOnActiveRoster));
       setError(error);
@@ -48,7 +50,7 @@ export default function ComparePage() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [season]);
 
   const togglePlayer = (id: string) => {
     setSelected((prev) =>
@@ -86,7 +88,19 @@ export default function ComparePage() {
         <p className="mt-4 text-slate-400">Loading players…</p>
       )}
 
-      <p className="mt-2 text-slate-400">Contract season: {DISPLAY_SEASON}. Choose up to three players to compare.</p>
+      <p className="mt-2 text-slate-400">Contract season: {displaySeason}. Choose up to three players to compare.</p>
+      <label className="mt-4 block text-sm">Contract season
+        <select value={season} onChange={(event) => {
+          setSeason(Number(event.target.value)); setLoading(true); setError(null); setPlayers([]); setPage(0);
+        }} className="ml-3 min-h-11 rounded-lg border border-slate-700 bg-slate-900 px-3">
+          <option value={2026}>2026–27</option>
+          <option value={2025}>2025–26</option>
+        </select>
+      </label>
+      <p className="mt-2 text-sm text-slate-400">
+        {season === 2026 ? `${players.filter((p) => p.capHit !== null).length} players have sourced current-season amounts. Records needing review show Unknown.` : "Historical amounts are from the original import and remain under review."}
+        {" "}Team labels reflect the loaded roster, not historical assignments.
+      </p>
       <section aria-label="Selected players" className="mt-6 rounded-xl border border-slate-700 bg-slate-900 p-4">
         <div className="flex items-center justify-between gap-3">
           <h2 className="font-semibold">Selected ({selected.length}/3)</h2>
@@ -167,15 +181,16 @@ export default function ComparePage() {
 
               <div className="mt-4 space-y-2">
                 <p>Cap Hit: {formatMoney(p.capHit)}</p>
-                <p>AAV: {formatMoney(p.aav)}</p>
+                <p>AAV (may include performance bonuses): {formatMoney(p.aav)}</p>
+                {p.amountSource && <a className="block text-sm underline" href={p.amountSource} target="_blank" rel="noreferrer">{p.amountReview === "individual" ? "Individually reviewed season breakdown" : "Reported season source"}</a>}
                 <p>Cap %: {p.capPercent}{p.capHit !== null ? "%" : ""}</p>
                 <p>Contract term: {p.years} years</p>
                 <p>Seasons remaining: {p.yearsRemaining}</p>
-                <p className="text-xs text-slate-400">Includes {DISPLAY_SEASON}; measured at season start.</p>
+                <p className="text-xs text-slate-400">Includes {displaySeason}; measured at season start.</p>
                 <p className="text-sm text-slate-400">{p.contractPeriod}</p>
                 <p>Clause: {p.clause}</p>
                 <p className="capitalize">
-                  Status: {p.seasonStatus === "active" ? p.capStatus : p.seasonStatus}
+                  {season === 2026 ? p.rosterNote : `Historical contract status: ${p.capStatus}`}
                 </p>
               </div>
             </div>
@@ -186,7 +201,7 @@ export default function ComparePage() {
       {/* Bar chart */}
       {selectedPlayers.length > 0 && (
         <div className="mt-6 rounded-2xl border border-slate-800 bg-slate-900 p-3 sm:p-6">
-          <h2 className="mb-2 text-xl font-bold">Cap Hit Comparison · {DISPLAY_SEASON}</h2>
+          <h2 className="mb-2 text-xl font-bold">Cap Hit Comparison · {displaySeason}</h2>
           <p className="mb-4 text-sm text-slate-400">Unknown cap hits are omitted from the chart.</p>
 
           <div className="h-72 w-full">

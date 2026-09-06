@@ -1,0 +1,718 @@
+{
+  "asOf": "2026-09-06",
+  "teams": 32,
+  "sourcePlayers": 1258,
+  "databasePlayers": 704,
+  "matchedTeam": 669,
+  "mismatches": [
+    {
+      "stored": {
+        "id": "c1fcbe91-229e-47e4-bd05-6c505d285c9a",
+        "nhl_player_id": 8476399,
+        "full_name": "Blake Coleman",
+        "position": "L",
+        "season_status": "active",
+        "team": "CGY"
+      },
+      "source": {
+        "team": "MIN",
+        "name": "Blake Coleman",
+        "position": "L"
+      }
+    },
+    {
+      "stored": {
+        "id": "6e6b0bee-d866-4974-bacf-c7e0c7ecaef9",
+        "nhl_player_id": 8477498,
+        "full_name": "Darnell Nurse",
+        "position": "D",
+        "season_status": "active",
+        "team": "EDM"
+      },
+      "source": {
+        "team": "SJS",
+        "name": "Darnell Nurse",
+        "position": "D"
+      }
+    },
+    {
+      "stored": {
+        "id": "c341cb9f-6b80-4a50-a3ba-c1c1ded41ea7",
+        "nhl_player_id": 8482221,
+        "full_name": "Devon Levi",
+        "position": "G",
+        "season_status": "active",
+        "team": "BUF"
+      },
+      "source": {
+        "team": "EDM",
+        "name": "Devon Levi",
+        "position": "G"
+      }
+    },
+    {
+      "stored": {
+        "id": "8293f005-629c-4b0d-a10c-941426de65d4",
+        "nhl_player_id": 8478136,
+        "full_name": "Jake Middleton",
+        "position": "D",
+        "season_status": "active",
+        "team": "MIN"
+      },
+      "source": {
+        "team": "CGY",
+        "name": "Jake Middleton",
+        "position": "D"
+      }
+    },
+    {
+      "stored": {
+        "id": "8d340cbc-71e5-4c8d-af8c-55d39f4e4e7a",
+        "nhl_player_id": 8476914,
+        "full_name": "Joonas Korpisalo",
+        "position": "G",
+        "season_status": "active",
+        "team": "BOS"
+      },
+      "source": {
+        "team": "NYR",
+        "name": "Joonas Korpisalo",
+        "position": "G"
+      }
+    },
+    {
+      "stored": {
+        "id": "5bd6603d-4838-463a-a13f-36acbea8e656",
+        "nhl_player_id": 8478434,
+        "full_name": "Keegan Kolesar",
+        "position": "R",
+        "season_status": "active",
+        "team": "VGK"
+      },
+      "source": {
+        "team": "DET",
+        "name": "Keegan Kolesar",
+        "position": "R"
+      }
+    },
+    {
+      "stored": {
+        "id": "49d1761b-f4da-4a7f-9ca4-32384b710381",
+        "nhl_player_id": 8482146,
+        "full_name": "Luke Evangelista",
+        "position": "R",
+        "season_status": "active",
+        "team": "NSH"
+      },
+      "source": {
+        "team": "NJD",
+        "name": "Luke Evangelista",
+        "position": "R"
+      }
+    },
+    {
+      "stored": {
+        "id": "23c26cf6-9d78-4212-9713-47f845e46e06",
+        "nhl_player_id": 8477969,
+        "full_name": "Marcus Pettersson",
+        "position": "D",
+        "season_status": "active",
+        "team": "VAN"
+      },
+      "source": {
+        "team": "NYR",
+        "name": "Marcus Pettersson",
+        "position": "D"
+      }
+    },
+    {
+      "stored": {
+        "id": "f158b9d0-0812-4684-8a2c-42929791ddda",
+        "nhl_player_id": 8477426,
+        "full_name": "Nick Paul",
+        "position": "L",
+        "season_status": "active",
+        "team": "TBL"
+      },
+      "source": {
+        "team": "TOR",
+        "name": "Nick Paul",
+        "position": "L"
+      }
+    },
+    {
+      "stored": {
+        "id": "5ea5a76e-f3a7-4dcf-8477-335b8f7d9029",
+        "nhl_player_id": 8476874,
+        "full_name": "Olli Maatta",
+        "position": "D",
+        "season_status": "active",
+        "team": "CGY"
+      },
+      "source": {
+        "team": "MIN",
+        "name": "Olli Maatta",
+        "position": "D"
+      }
+    },
+    {
+      "stored": {
+        "id": "4cba100f-6e56-4cd0-a2ec-26462c7e48ab",
+        "nhl_player_id": 8480434,
+        "full_name": "Sean Durzi",
+        "position": "D",
+        "season_status": "active",
+        "team": "UTA"
+      },
+      "source": {
+        "team": "NYR",
+        "name": "Sean Durzi",
+        "position": "D"
+      }
+    },
+    {
+      "stored": {
+        "id": "72c404e8-c80a-43ec-9cf1-8d7ee1a5fc1f",
+        "nhl_player_id": 8482166,
+        "full_name": "Shakir Mukhamadullin",
+        "position": "D",
+        "season_status": "active",
+        "team": "SJS"
+      },
+      "source": {
+        "team": "EDM",
+        "name": "Shakir Mukhamadullin",
+        "position": "D"
+      }
+    },
+    {
+      "stored": {
+        "id": "15089ebb-8c6d-47b2-80b4-e82850ab76ab",
+        "nhl_player_id": 8476389,
+        "full_name": "Vincent Trocheck",
+        "position": "C",
+        "season_status": "active",
+        "team": "NYR"
+      },
+      "source": {
+        "team": "UTA",
+        "name": "Vincent Trocheck",
+        "position": "C"
+      }
+    },
+    {
+      "stored": {
+        "id": "73b1577d-8323-4baa-9ac7-801bab35ee2a",
+        "nhl_player_id": 8478840,
+        "full_name": "Will Borgen",
+        "position": "D",
+        "season_status": "active",
+        "team": "NYR"
+      },
+      "source": {
+        "team": "BOS",
+        "name": "Will Borgen",
+        "position": "D"
+      }
+    }
+  ],
+  "notInFeed": [
+    {
+      "id": "ffcc47c2-0f0b-4322-97c7-037ab114f7ba",
+      "nhl_player_id": 8484166,
+      "full_name": "Adam Fantilli",
+      "position": "C",
+      "season_status": "active",
+      "team": "CBJ"
+    },
+    {
+      "id": "4d7cfc53-3997-4097-8376-5ab555d7abf0",
+      "nhl_player_id": 8482100,
+      "full_name": "Alexander Nikishin",
+      "position": "D",
+      "season_status": "active",
+      "team": "CAR"
+    },
+    {
+      "id": "e73cdb39-9cb9-4f52-8ee8-f710545b8770",
+      "nhl_player_id": 8471685,
+      "full_name": "Anze Kopitar",
+      "position": "C",
+      "season_status": "active",
+      "team": "LAK"
+    },
+    {
+      "id": "4b91d357-4e0d-4eb5-94af-0cca677197f0",
+      "nhl_player_id": 8481827,
+      "full_name": "Ben McCartney",
+      "position": "L",
+      "season_status": "active",
+      "team": "UTA"
+    },
+    {
+      "id": "0a0a7ddb-dc3a-42fb-af9b-1d546e60f281",
+      "nhl_player_id": 8479656,
+      "full_name": "Cam Hebig",
+      "position": "C",
+      "season_status": "active",
+      "team": "UTA"
+    },
+    {
+      "id": "d0e7dfe9-0acb-4fe3-a853-261841edeb04",
+      "nhl_player_id": 8483445,
+      "full_name": "Cutter Gauthier",
+      "position": "L",
+      "season_status": "active",
+      "team": "ANA"
+    },
+    {
+      "id": "7b8d6c8a-a96f-4545-8ff0-d33cc9dfc9ad",
+      "nhl_player_id": 8481019,
+      "full_name": "David Gustafsson",
+      "position": "C",
+      "season_status": "active",
+      "team": "PIT"
+    },
+    {
+      "id": "9b04f830-607c-49ce-b08a-e2ba667749a8",
+      "nhl_player_id": 8482807,
+      "full_name": "Ethan Del Mastro",
+      "position": "D",
+      "season_status": "active",
+      "team": "CHI"
+    },
+    {
+      "id": "e208840f-6706-448d-afbe-a157269fbedc",
+      "nhl_player_id": 8480842,
+      "full_name": "Filip Hallander",
+      "position": "C",
+      "season_status": "active",
+      "team": "PIT"
+    },
+    {
+      "id": "d3b8b761-9b2c-4f19-a781-d9242b0c79c4",
+      "nhl_player_id": 8482470,
+      "full_name": "Ilya Solovyov",
+      "position": "D",
+      "season_status": "active",
+      "team": "PIT"
+    },
+    {
+      "id": "4106d674-5e96-440a-b254-1ee120188c9f",
+      "nhl_player_id": 8486169,
+      "full_name": "Jake Livanavage",
+      "position": "D",
+      "season_status": "active",
+      "team": "PIT"
+    },
+    {
+      "id": "9c4a9a7d-448f-4ad5-aec0-8fda6e7107d2",
+      "nhl_player_id": 8483530,
+      "full_name": "Jaxson Stauber",
+      "position": "G",
+      "season_status": "active",
+      "team": "UTA"
+    },
+    {
+      "id": "04262f6c-0307-48ff-ade7-1e9d3a34ae81",
+      "nhl_player_id": null,
+      "full_name": "Johnny Gaudreau",
+      "position": "LW",
+      "season_status": "deceased",
+      "team": "CBJ"
+    },
+    {
+      "id": "f358b7ee-a9a0-4494-b132-8deee2798b6f",
+      "nhl_player_id": 8477494,
+      "full_name": "Jonathan Drouin",
+      "position": "L",
+      "season_status": "active",
+      "team": "STL"
+    },
+    {
+      "id": "91be9497-5997-44ab-961f-b2194be0592a",
+      "nhl_player_id": null,
+      "full_name": "Logan Couture",
+      "position": "C",
+      "season_status": "retired",
+      "team": "SJS"
+    },
+    {
+      "id": "429119b5-3bb3-470a-9c62-e4f088fcd450",
+      "nhl_player_id": 8483673,
+      "full_name": "Oskar Pettersson",
+      "position": "R",
+      "season_status": "active",
+      "team": "OTT"
+    },
+    {
+      "id": "c0eca6f5-fcc4-4caa-8270-4845bf46a0e5",
+      "nhl_player_id": 8477435,
+      "full_name": "Ryan Graves",
+      "position": "D",
+      "season_status": "active",
+      "team": "PIT"
+    },
+    {
+      "id": "2a6be624-4f0c-4552-a9cf-c94e10b31ea2",
+      "nhl_player_id": 8482762,
+      "full_name": "Simon Edvinsson",
+      "position": "D",
+      "season_status": "active",
+      "team": "DET"
+    },
+    {
+      "id": "d0c8a6a5-5e08-455e-a120-a97afa14e904",
+      "nhl_player_id": 8482674,
+      "full_name": "Tyler Boucher",
+      "position": "R",
+      "season_status": "active",
+      "team": "OTT"
+    },
+    {
+      "id": "54404b2b-fa4c-4623-93e1-52467a91c901",
+      "nhl_player_id": 8483746,
+      "full_name": "Vyacheslav Buteyets",
+      "position": "G",
+      "season_status": "active",
+      "team": "ANA"
+    },
+    {
+      "id": "4041b3e3-6a83-40ed-a306-66da52e44243",
+      "nhl_player_id": 8482947,
+      "full_name": "Zakhar Bardakov",
+      "position": "C",
+      "season_status": "active",
+      "team": "COL"
+    }
+  ],
+  "ambiguous": [],
+  "sourceDuplicates": {},
+  "sourceOnly": 575,
+  "individualReview": {
+    "checkedAt": "2026-09-06",
+    "productionApplied": false,
+    "scope": "All 18 previously unexplained absences individually searched. Affiliation/contract evidence does not establish why the API omitted a player or prove an active NHL roster slot.",
+    "summary": {
+      "unsigned_rfa": 5,
+      "signed_affiliation": 10,
+      "unsigned_ufa": 1,
+      "overseas": 2
+    },
+    "players": [
+      {
+        "name": "Adam Fantilli",
+        "storedTeam": "CBJ",
+        "classification": "unsigned_rfa",
+        "finding": "Unsigned RFA; retain Columbus rights affiliation; no current signed cap hit.",
+        "sources": [
+          "https://puckpedia.com/player/adam-fantilli"
+        ]
+      },
+      {
+        "name": "Alexander Nikishin",
+        "storedTeam": "CAR",
+        "classification": "unsigned_rfa",
+        "finding": "Unsigned RFA; retain Carolina rights affiliation; no current signed cap hit.",
+        "sources": [
+          "https://puckpedia.com/player/alexander-nikishin"
+        ]
+      },
+      {
+        "name": "Ben McCartney",
+        "storedTeam": "UTA",
+        "classification": "signed_affiliation",
+        "finding": "Utah two-year contract announced June 2025. Keep affiliation; current NHL roster slot unverified.",
+        "sources": [
+          "https://www.nhl.com/utah/news/utah-signs-ben-mccartney-to-two-year-two-way-contract-release-6-11-25"
+        ]
+      },
+      {
+        "name": "Cam Hebig",
+        "storedTeam": "UTA",
+        "classification": "signed_affiliation",
+        "finding": "Utah two-year deal announced July 2025. Keep affiliation; current NHL roster slot unverified.",
+        "sources": [
+          "https://www.nhl.com/utah/news/utah-signs-cameron-hebig-to-two-year-two-way-contract-release-7-17-25"
+        ]
+      },
+      {
+        "name": "Cutter Gauthier",
+        "storedTeam": "ANA",
+        "classification": "unsigned_rfa",
+        "finding": "Unsigned RFA; retain Anaheim rights affiliation; no current signed cap hit.",
+        "sources": [
+          "https://puckpedia.com/player/cutter-gauthier"
+        ]
+      },
+      {
+        "name": "David Gustafsson",
+        "storedTeam": "PIT",
+        "classification": "signed_affiliation",
+        "finding": "Pittsburgh signed him through 2026–27 at $850,000. Keep affiliation; roster slot unverified.",
+        "sources": [
+          "https://www.nhl.com/penguins/news/penguins-avoid-arbitration-and-agree-to-contracts-with-four-players"
+        ]
+      },
+      {
+        "name": "Ethan Del Mastro",
+        "storedTeam": "CHI",
+        "classification": "unsigned_rfa",
+        "finding": "Unsigned RFA; retain Chicago rights affiliation; no current signed cap hit.",
+        "sources": [
+          "https://puckpedia.com/player/ethan-del-mastro"
+        ]
+      },
+      {
+        "name": "Filip Hallander",
+        "storedTeam": "PIT",
+        "classification": "signed_affiliation",
+        "finding": "Pittsburgh contract through 2026–27. Keep affiliation; do not infer current injury status from old reports.",
+        "sources": [
+          "https://www.nhl.com/penguins/news/penguins-sign-forward-filip-hallander-to-a-two-year-contract"
+        ]
+      },
+      {
+        "name": "Ilya Solovyov",
+        "storedTeam": "PIT",
+        "classification": "signed_affiliation",
+        "finding": "Pittsburgh extension confirmed May 2026. Keep affiliation; current NHL roster slot unverified.",
+        "sources": [
+          "https://www.nhl.com/penguins/news/penguins-re-sign-forward-connor-dewar-and-defenseman-ilya-solovyov"
+        ]
+      },
+      {
+        "name": "Jake Livanavage",
+        "storedTeam": "PIT",
+        "classification": "signed_affiliation",
+        "finding": "Pittsburgh entry-level signing confirmed April 2026. Keep affiliation; roster slot unverified.",
+        "sources": [
+          "https://www.nhl.com/penguins/news/penguins-sign-defenseman-jake-livanavage-to-a-two-year-entry-level-contract"
+        ]
+      },
+      {
+        "name": "Jaxson Stauber",
+        "storedTeam": "UTA",
+        "classification": "signed_affiliation",
+        "finding": "Utah two-year contract announced April 2025. Keep affiliation; current NHL roster slot unverified.",
+        "sources": [
+          "https://www.nhl.com/utah/news/utah-signs-stauber-to-two-year-two-way-contract-release-4-29-25"
+        ]
+      },
+      {
+        "name": "Jonathan Drouin",
+        "storedTeam": "STL",
+        "classification": "unsigned_ufa",
+        "finding": "Listed as UFA after Blues buyout process. Remove current STL playing affiliation; preserve historical contract and review buyout charges.",
+        "sources": [
+          "https://puckpedia.com/player/jonathan-drouin",
+          "https://www.nhl.com/blues/news/blues-make-qualifying-offers-to-2-rfas"
+        ]
+      },
+      {
+        "name": "Oskar Pettersson",
+        "storedTeam": "OTT",
+        "classification": "signed_affiliation",
+        "finding": "Ottawa contract listed through 2026–27. Keep affiliation; roster slot unverified. Do not erase entry-level slide years.",
+        "sources": [
+          "https://puckpedia.com/player/oskar-pettersson",
+          "https://www.nhl.com/senators/news/senators-sign-forward-oskar-pettersson-to-a-three-year-entry-level-con-344889886"
+        ]
+      },
+      {
+        "name": "Ryan Graves",
+        "storedTeam": "PIT",
+        "classification": "signed_affiliation",
+        "finding": "Pittsburgh contract remains listed through 2028–29, with AHL affiliation. Keep contract; NHL roster slot unverified. Buyout speculation is not a transaction.",
+        "sources": [
+          "https://puckpedia.com/player/ryan-graves"
+        ]
+      },
+      {
+        "name": "Simon Edvinsson",
+        "storedTeam": "DET",
+        "classification": "unsigned_rfa",
+        "finding": "Unsigned RFA; retain Detroit rights affiliation; no current signed cap hit.",
+        "sources": [
+          "https://puckpedia.com/player/simon-edvinsson"
+        ]
+      },
+      {
+        "name": "Tyler Boucher",
+        "storedTeam": "OTT",
+        "classification": "signed_affiliation",
+        "finding": "Ottawa one-year two-way signing confirmed July 2026. Keep affiliation; current NHL roster slot unverified.",
+        "sources": [
+          "https://www.nhl.com/senators/news/senators-agree-to-terms-with-forward-tyler-boucher-on-a-one-year-two-way-contract"
+        ]
+      },
+      {
+        "name": "Vyacheslav Buteyets",
+        "storedTeam": "ANA",
+        "classification": "overseas",
+        "finding": "Shanghai loan announced July 24, 2026. Classify overseas; preserve Anaheim rights separately. Club page available via indexed search only.",
+        "sources": [
+          "https://hc-dragons.com/news/vyacheslav-buteecz-perehodit-v-shanhaj-dregons-na-pravah-arendy/",
+          "https://www.prohockeyrumors.com/2026/07/ducks-rfa-vyacheslav-buteyets-signs-in-khl.html"
+        ]
+      },
+      {
+        "name": "Zakhar Bardakov",
+        "storedTeam": "COL",
+        "classification": "overseas",
+        "finding": "SKA announced a deal through 2026–27. Classify overseas; preserve Colorado rights separately. Club page available via indexed search only.",
+        "sources": [
+          "https://www.ska.ru/news/view/485765-ska-podpisal-kontrakt-s-zakharom-bardakovym/",
+          "https://www.prohockeyrumors.com/2026/07/zakhar-bardakov-expected-to-sign-in-khl.html"
+        ]
+      }
+    ],
+    "releaseRequirements": [
+      "Represent NHL rights separately from current playing team.",
+      "Represent contract status separately from NHL roster status.",
+      "Revalidate signed cap amounts and 2026–27 coverage before applying database corrections."
+    ]
+  },
+  "contractReview": {
+    "checkedAt": "2026-09-06",
+    "season": "2026-27",
+    "productionApplied": false,
+    "conclusion": "All ten have publicly documented contracts covering 2026–27. Season-specific monetary values verified against PuckPedia contract tables; club announcements support signings. NHL roster-slot verification is separate.",
+    "players": [
+      {
+        "name": "Ben McCartney",
+        "team": "UTA",
+        "startSeason": "2025-26",
+        "endSeason": "2026-27",
+        "termYears": 2,
+        "seasonsRemaining": 1,
+        "seasonCapHit": 850000,
+        "sourceSeasonAav": 850000,
+        "source": "https://puckpedia.com/player/ben-mccartney/contracts",
+        "note": "Season table: $775,000 then $850,000; summary says $812,500. Original announcement predates the higher minimum."
+      },
+      {
+        "name": "Cam Hebig",
+        "team": "UTA",
+        "startSeason": "2025-26",
+        "endSeason": "2026-27",
+        "termYears": 2,
+        "seasonsRemaining": 1,
+        "seasonCapHit": 812500,
+        "sourceSeasonAav": 812500,
+        "source": "https://puckpedia.com/player/cameron-hebig/contracts",
+        "note": "Season cap hit stays $812,500 although 2026–27 base salary is $850,000."
+      },
+      {
+        "name": "David Gustafsson",
+        "team": "PIT",
+        "startSeason": "2026-27",
+        "endSeason": "2026-27",
+        "termYears": 1,
+        "seasonsRemaining": 1,
+        "seasonCapHit": 850000,
+        "sourceSeasonAav": 850000,
+        "source": "https://puckpedia.com/player/david-gustafsson/contracts",
+        "note": "Use July 2026 signing, not expired Winnipeg deal."
+      },
+      {
+        "name": "Filip Hallander",
+        "team": "PIT",
+        "startSeason": "2025-26",
+        "endSeason": "2026-27",
+        "termYears": 2,
+        "seasonsRemaining": 1,
+        "seasonCapHit": 850000,
+        "sourceSeasonAav": 850000,
+        "source": "https://puckpedia.com/player/filip-hallander/contracts",
+        "note": "Season table: $775,000 then $850,000; summary says $812,500."
+      },
+      {
+        "name": "Ilya Solovyov",
+        "team": "PIT",
+        "startSeason": "2026-27",
+        "endSeason": "2026-27",
+        "termYears": 1,
+        "seasonsRemaining": 1,
+        "seasonCapHit": 850000,
+        "sourceSeasonAav": 850000,
+        "source": "https://puckpedia.com/player/ilya-solovyov/contracts",
+        "note": "Use May 2026 extension, not expired Calgary deal."
+      },
+      {
+        "name": "Jake Livanavage",
+        "team": "PIT",
+        "startSeason": "2025-26",
+        "endSeason": "2026-27",
+        "termYears": 2,
+        "seasonsRemaining": 1,
+        "seasonCapHit": 975000,
+        "sourceSeasonAav": 1100000,
+        "source": "https://puckpedia.com/player/jake-livanavage/contracts",
+        "note": "Source lists cap hit separately from bonus-inclusive AAV; 2026–27 performance bonus potential is $250,000."
+      },
+      {
+        "name": "Jaxson Stauber",
+        "team": "UTA",
+        "startSeason": "2025-26",
+        "endSeason": "2026-27",
+        "termYears": 2,
+        "seasonsRemaining": 1,
+        "seasonCapHit": 850000,
+        "sourceSeasonAav": 850000,
+        "source": "https://puckpedia.com/player/jaxson-stauber/contracts",
+        "note": "Season table: $775,000 then $850,000; summary says $812,500."
+      },
+      {
+        "name": "Oskar Pettersson",
+        "team": "OTT",
+        "startSeason": "2023-24",
+        "endSeason": "2026-27",
+        "termYears": 3,
+        "seasonsRemaining": 1,
+        "seasonCapHit": 910000,
+        "sourceSeasonAav": 945000,
+        "source": "https://puckpedia.com/player/oskar-pettersson/contracts",
+        "note": "Three-year ELC spans four listed seasons. Source shows varying cap hits; preserve slide history and bonus distinction."
+      },
+      {
+        "name": "Ryan Graves",
+        "team": "PIT",
+        "startSeason": "2023-24",
+        "endSeason": "2028-29",
+        "termYears": 6,
+        "seasonsRemaining": 3,
+        "seasonCapHit": 4500000,
+        "sourceSeasonAav": 4500000,
+        "source": "https://puckpedia.com/player/ryan-graves/contracts",
+        "note": "Three seasons remain including 2026–27. Contract amount is not the net team cap charge if assigned to minors."
+      },
+      {
+        "name": "Tyler Boucher",
+        "team": "OTT",
+        "startSeason": "2026-27",
+        "endSeason": "2026-27",
+        "termYears": 1,
+        "seasonsRemaining": 1,
+        "seasonCapHit": 850000,
+        "sourceSeasonAav": 850000,
+        "source": "https://puckpedia.com/player/tyler-boucher/contracts",
+        "note": "Use July 2026 signing, not expired entry-level deal."
+      }
+    ],
+    "implementationRequirements": [
+      "Store season-specific cap hits; do not use contract-summary averages for every season.",
+      "Keep bonus-inclusive source AAV separate from cap hit.",
+      "Preserve prior contracts when adding Gustafsson, Solovyov and Boucher extensions.",
+      "Do not infer active NHL roster slots or net team charges from contract verification."
+    ]
+  },
+  "expansion": {
+    "date": "2026-09-06",
+    "reviewed": 85,
+    "sourceReported": 606,
+    "held": 1,
+    "productionApplied": false,
+    "note": "All 73 eligible held candidates were individually reviewed and promoted to reviewed overrides. Jonathan Drouin remains excluded because unsigned-UFA status supersedes the stale bought-out contract listing. Bulk source records are not independently verified. No new players imported."
+  }
+}
