@@ -4,7 +4,7 @@ import { createClient } from "@supabase/supabase-js";
 loadEnvConfig(process.cwd());
 
 const NHL_API_BASE_URL = "https://api-web.nhle.com/v1";
-const DEFAULT_SEASON = "20252026";
+const DEFAULT_SEASON = "current";
 const TEAM_ABBREVIATIONS = [
   "ANA", "BOS", "BUF", "CAR", "CBJ", "CGY", "CHI", "COL",
   "DAL", "DET", "EDM", "FLA", "LAK", "MIN", "MTL", "NJD",
@@ -65,8 +65,8 @@ function rosterPlayers(roster: NhlRoster): NhlPlayer[] {
 
 async function main() {
   const season = process.env.NHL_SEASON?.trim() || DEFAULT_SEASON;
-  if (!/^\d{8}$/.test(season)) {
-    throw new Error("NHL_SEASON must use the format 20252026.");
+  if (season !== "current" && !/^\d{8}$/.test(season)) {
+    throw new Error("NHL_SEASON must be current or use the format 20252026.");
   }
 
   const supabaseUrl = requiredEnv("NEXT_PUBLIC_SUPABASE_URL");
@@ -96,7 +96,9 @@ async function main() {
     );
   }
 
-  let savedPlayers = 0;
+  const apply = process.argv.includes("--apply");
+  const pending: { nhl_player_id: number; full_name: string; position: string | null; team_id: string; season_status: string }[] = [];
+  const seen = new Set<number>();
   const failures: string[] = [];
 
   for (const abbreviation of TEAM_ABBREVIATIONS) {
@@ -116,14 +118,17 @@ async function main() {
         throw new Error("NHL API returned an empty roster");
       }
 
-      const { error } = await supabase
-        .from("players")
-        .upsert(players, { onConflict: "nhl_player_id" });
-
-      if (error) throw new Error(error.message);
-
-      savedPlayers += players.length;
-      console.log(`${abbreviation}: saved ${players.length} players`);
+      for (const player of players) {
+        if (!Number.isSafeInteger(player.nhl_player_id) || !player.full_name.trim()) {
+          throw new Error("NHL API returned an invalid player");
+        }
+        if (seen.has(player.nhl_player_id)) {
+          throw new Error(`Duplicate NHL player ID ${player.nhl_player_id}; resolve affiliation before applying`);
+        }
+        seen.add(player.nhl_player_id);
+      }
+      pending.push(...players);
+      console.log(`${abbreviation}: validated ${players.length} players`);
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       failures.push(`${abbreviation}: ${message}`);
@@ -131,11 +136,18 @@ async function main() {
     }
   }
 
-  console.log(`Roster sync complete: ${savedPlayers} player records saved.`);
-
   if (failures.length > 0) {
-    throw new Error(`Roster sync had ${failures.length} failed team(s).`);
+    throw new Error(`Roster validation had ${failures.length} failed team(s); no players written.`);
   }
+  console.log(`Validated ${pending.length} players for ${season}.`);
+  if (!apply) {
+    console.log("Dry run: no players written. Review roster coverage before using --apply.");
+    return;
+  }
+  // One PostgREST request makes the upsert atomic across all clubs.
+  const { error } = await supabase.from("players").upsert(pending, { onConflict: "nhl_player_id" });
+  if (error) throw new Error(`Roster sync failed: ${error.message}`);
+  console.log(`Roster sync complete: ${pending.length} player records saved.`);
 }
 
 main().catch((error) => {

@@ -1,0 +1,177 @@
+[
+  {
+    "nhlPlayerId": 8476399,
+    "team": "MIN",
+    "status": null,
+    "source": "https://api-web.nhle.com/v1/roster/MIN/current",
+    "asOf": "2026-09-06"
+  },
+  {
+    "nhlPlayerId": 8477498,
+    "team": "SJS",
+    "status": null,
+    "source": "https://api-web.nhle.com/v1/roster/SJS/current",
+    "asOf": "2026-09-06"
+  },
+  {
+    "nhlPlayerId": 8482221,
+    "team": "EDM",
+    "status": null,
+    "source": "https://api-web.nhle.com/v1/roster/EDM/current",
+    "asOf": "2026-09-06"
+  },
+  {
+    "nhlPlayerId": 8478136,
+    "team": "CGY",
+    "status": null,
+    "source": "https://api-web.nhle.com/v1/roster/CGY/current",
+    "asOf": "2026-09-06"
+  },
+  {
+    "nhlPlayerId": 8476914,
+    "team": "NYR",
+    "status": null,
+    "source": "https://api-web.nhle.com/v1/roster/NYR/current",
+    "asOf": "2026-09-06"
+  },
+  {
+    "nhlPlayerId": 8478434,
+    "team": "DET",
+    "status": null,
+    "source": "https://api-web.nhle.com/v1/roster/DET/current",
+    "asOf": "2026-09-06"
+  },
+  {
+    "nhlPlayerId": 8482146,
+    "team": "NJD",
+    "status": null,
+    "source": "https://api-web.nhle.com/v1/roster/NJD/current",
+    "asOf": "2026-09-06"
+  },
+  {
+    "nhlPlayerId": 8477969,
+    "team": "NYR",
+    "status": null,
+    "source": "https://api-web.nhle.com/v1/roster/NYR/current",
+    "asOf": "2026-09-06"
+  },
+  {
+    "nhlPlayerId": 8477426,
+    "team": "TOR",
+    "status": null,
+    "source": "https://api-web.nhle.com/v1/roster/TOR/current",
+    "asOf": "2026-09-06"
+  },
+  {
+    "nhlPlayerId": 8476874,
+    "team": "MIN",
+    "status": null,
+    "source": "https://api-web.nhle.com/v1/roster/MIN/current",
+    "asOf": "2026-09-06"
+  },
+  {
+    "nhlPlayerId": 8480434,
+    "team": "NYR",
+    "status": null,
+    "source": "https://api-web.nhle.com/v1/roster/NYR/current",
+    "asOf": "2026-09-06"
+  },
+  {
+    "nhlPlayerId": 8482166,
+    "team": "EDM",
+    "status": null,
+    "source": "https://api-web.nhle.com/v1/roster/EDM/current",
+    "asOf": "2026-09-06"
+  },
+  {
+    "nhlPlayerId": 8476389,
+    "team": "UTA",
+    "status": null,
+    "source": "https://api-web.nhle.com/v1/roster/UTA/current",
+    "asOf": "2026-09-06"
+  },
+  {
+    "nhlPlayerId": 8478840,
+    "team": "BOS",
+    "status": null,
+    "source": "https://api-web.nhle.com/v1/roster/BOS/current",
+    "asOf": "2026-09-06"
+  },
+  {
+    "nhlPlayerId": 8484166,
+    "team": "CBJ",
+    "status": "unsigned_rfa",
+    "source": "https://puckpedia.com/player/adam-fantilli",
+    "asOf": "2026-09-06"
+  },
+  {
+    "nhlPlayerId": 8482100,
+    "team": "CAR",
+    "status": "unsigned_rfa",
+    "source": "https://puckpedia.com/player/alexander-nikishin",
+    "asOf": "2026-09-06"
+  },
+  {
+    "nhlPlayerId": 8483445,
+    "team": "ANA",
+    "status": "unsigned_rfa",
+    "source": "https://puckpedia.com/player/cutter-gauthier",
+    "asOf": "2026-09-06"
+  },
+  {
+    "nhlPlayerId": 8482807,
+    "team": "CHI",
+    "status": "unsigned_rfa",
+    "source": "https://puckpedia.com/player/ethan-del-mastro",
+    "asOf": "2026-09-06"
+  },
+  {
+    "nhlPlayerId": 8477494,
+    "team": null,
+    "status": "unsigned_ufa",
+    "source": "https://puckpedia.com/player/jonathan-drouin",
+    "asOf": "2026-09-06"
+  },
+  {
+    "nhlPlayerId": 8482762,
+    "team": "DET",
+    "status": "unsigned_rfa",
+    "source": "https://puckpedia.com/player/simon-edvinsson",
+    "asOf": "2026-09-06"
+  },
+  {
+    "nhlPlayerId": 8483746,
+    "team": "ANA",
+    "status": "overseas",
+    "source": "https://hc-dragons.com/news/vyacheslav-buteecz-perehodit-v-shanhaj-dregons-na-pravah-arendy/",
+    "asOf": "2026-09-06"
+  },
+  {
+    "nhlPlayerId": 8482947,
+    "team": "COL",
+    "status": "overseas",
+    "source": "https://www.ska.ru/news/view/485765-ska-podpisal-kontrakt-s-zakharom-bardakovym/",
+    "asOf": "2026-09-06"
+  },
+  {
+    "nhlPlayerId": 8471685,
+    "team": "LAK",
+    "status": "retired",
+    "source": "https://www.nhl.com/news/anze-kopitar-happy-in-retirement-after-storied-nhl-career",
+    "asOf": "2026-09-06"
+  },
+  {
+    "nhlPlayerId": 8482964,
+    "team": "MTL",
+    "status": "unsigned_rfa",
+    "source": "https://puckpedia.com/player/arber-xhekaj",
+    "asOf": "2026-09-06"
+  },
+  {
+    "nhlPlayerId": 8482737,
+    "team": "MTL",
+    "status": "unsigned_rfa",
+    "source": "https://www.eliteprospects.com/player/529393/zachary-bolduc",
+    "asOf": "2026-09-06"
+  }
+]
